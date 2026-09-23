@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><!-- preview only: remove when published on crystaphase.com -->
+<title>Request Your 2027 Crystaphase Mousepad</title>
+<!--
+  CRYSTAPHASE 2027 MOUSEPAD REQUEST FORM  (country-first addresses)
+  -----------------------------------------------------------------
+  Drop-in page (or embed the <main> block) for crystaphase.com/mousepad.
+
+  HOW IT WORKS
+  - Step 1: the requester picks the destination country.
+  - Step 2: the address fields rebuild for that country: field names, order,
+    which fields are required, dropdowns (US states, Canadian provinces,
+    Mexican/Brazilian/Indian states, Jamaican parishes, etc.) and postal-code checks.
+  - Before submitting, they see "Your shipping label will read:" in the exact
+    format the destination country's post office expects, and confirm it.
+
+  WHAT YOU RECEIVE (JSON to your webhook -> one tracker row)
+    firstName, lastName, email, company, phone, quantity,
+    countryName, countryCode (ISO-2, what label platforms want),
+    line1, line2, locality (neighborhood/colonia/bairro), city, district,
+    region (state/province/prefecture), postalCode,
+    labelAddress  <- ready to paste; lines in the correct local order
+    + campaign, submittedAt, utm_*
+
+  SETUP
+  1. Receiver: Power Automate "When an HTTP request is received" -> "Add a row
+     into a table" (Mousepad Master Tracker 2027.xlsx) -> confirmation email.
+     (Or Zapier: Webhooks Catch Hook -> Excel row -> email.)
+     Duplicate check: look up email first; if found, update that row.
+  2. Paste the trigger URL into ENDPOINT_URL below.
+  3. ART_URL points to assets/mousepad-2027.webp (swap it if the art changes).
+  4. Add a country: copy an entry in FORMATS (or map it to a shared
+     template in COUNTRY_LIST). Anything unlisted uses the international template.
+-->
+<style>
+  :root{
+    --ink:#111; --muted:#5b5b5b; --line:#d6d6d6; --bg:#f6f6f4; --card:#fff;
+    --accent:#c8102e; --accent-ink:#fff; --err:#b00020; --soft:#faf7f7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Avenir Next","Avenir Next LT Pro",Avenir,"Segoe UI",Arial,sans-serif;line-height:1.5}
+  main{max-width:760px;margin:0 auto;padding:32px 16px 64px}
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;margin-bottom:28px}
+  .hero img{width:100%;border:1px solid var(--line);background:#fff}
+  .hero img.art{border:0;background:none;height:auto}
+  .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 6px}
+  h1{font-size:2rem;line-height:1.15;margin:0 0 12px}
+  .lead{color:var(--muted);margin:0}
+  form{background:var(--card);border:1px solid var(--line);padding:28px}
+  fieldset{border:0;padding:0;margin:0 0 24px}
+  legend{font-weight:600;font-size:1.05rem;margin-bottom:12px;padding:0;display:flex;gap:10px;align-items:center}
+  .step{display:inline-grid;place-items:center;width:26px;height:26px;background:var(--accent);color:#fff;font-size:.85rem}
+  .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0 14px}
+  .w6{grid-column:span 6}.w4{grid-column:span 4}.w3{grid-column:span 3}.w2{grid-column:span 2}
+  label{display:block;font-size:.9rem;font-weight:600;margin:0 0 4px}
+  .opt{font-weight:400;color:var(--muted)}
+  .field{margin-bottom:14px}
+  input,select{width:100%;font:inherit;padding:10px 12px;border:1px solid #bdbdbd;background:#fff;color:var(--ink);border-radius:0}
+  input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .hint{font-size:.8rem;color:var(--muted);margin-top:4px}
+  .err-msg{font-size:.8rem;color:var(--err);margin-top:4px;display:none}
+  .invalid input,.invalid select{border-color:var(--err)}
+  .invalid .err-msg{display:block}
+  .invalid .hint{display:none}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;font-weight:400}
+  .check input{width:auto;margin-top:4px}
+  #addressBlock[hidden], #afterAddress[hidden]{display:none}
+  .locked{padding:18px;border:1px dashed var(--line);color:var(--muted);font-size:.9rem}
+  .preview{background:var(--soft);border:1px solid #ecd3d7;padding:16px 18px;margin:4px 0 16px}
+  .preview h3{margin:0 0 8px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .preview pre{margin:0;font-family:"SFMono-Regular",Consolas,"Courier New",monospace;font-size:.95rem;white-space:pre-wrap;line-height:1.45}
+  .hp{position:absolute;left:-9999px}
+  button{font:inherit;font-weight:600;background:var(--accent);color:var(--accent-ink);border:0;padding:14px 28px;cursor:pointer}
+  button[disabled]{opacity:.6;cursor:wait}
+  .note{font-size:.8rem;color:var(--muted);margin-top:14px}
+  .banner{padding:14px 16px;margin-bottom:18px;display:none}
+  .banner.err{display:block;background:#fdecee;color:var(--err);border:1px solid #f3c2c9}
+  .thanks{display:none;background:var(--card);border:1px solid var(--line);padding:36px;text-align:center}
+  .thanks h2{margin:0 0 8px}
+  @media (max-width:640px){
+    .hero{grid-template-columns:1fr}
+    .w4,.w3,.w2{grid-column:span 6}
+    h1{font-size:1.6rem}
+    form{padding:20px}
+  }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Crystaphase 2027 Calendar Mousepad</p>
+      <h1>Get your 2027 mousepad.</h1>
+      <p class="lead">Every year we make a calendar mousepad for the people we work with. Tell us where to send yours and how many your team would like (up to 10). We ship weekly from Houston, with tracking, to anywhere in the world.</p>
+    </div>
+    <img id="art" alt="The 2027 Crystaphase calendar mousepad: a red Crystalert hotline phone beside the headline 'Optimization is just a call away.'" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 450'><rect width='380' height='450' fill='%23f1f1ef'/><rect x='24' y='24' width='332' height='402' fill='none' stroke='%23c8102e' stroke-width='3'/><text x='190' y='225' font-family='Arial' font-size='20' text-anchor='middle' fill='%23555'>2027 mousepad art</text></svg>">
+  </section>
+
+  <form id="mp-form" novalidate>
+    <div id="banner" class="banner" role="alert"></div>
+
+    <fieldset>
+      <legend><span class="step">1</span>Where should we ship it?</legend>
+      <div class="field">
+        <label for="country">Destination country</label>
+        <select id="country" name="country" autocomplete="country" required></select>
+        <div class="hint">We'll show the address fields used in that country.</div>
+        <div class="err-msg">Please choose a country.</div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="step">2</span>Shipping address</legend>
+      <div id="lockedMsg" class="locked">Choose a country above to see its address fields.</div>
+      <div id="addressBlock" hidden>
+        <div class="grid">
+          <div class="field w3"><label for="firstName">First name</label><input id="firstName" name="firstName" autocomplete="given-name" required><div class="err-msg">Please enter your first name.</div></div>
+          <div class="field w3"><label for="lastName">Last name</label><input id="lastName" name="lastName" autocomplete="family-name" required><div class="err-msg">Please enter your last name.</div></div>
+          <div class="field w6"><label for="company">Company / site</label><input id="company" name="company" autocomplete="organization" required><div class="err-msg">Please enter your company or site.</div></div>
+        </div>
+        <div class="grid" id="addrFields"></div>
+        <div class="grid">
+          <div class="field w3"><label for="email">Work email</label><input id="email" name="email" type="email" autocomplete="email" required><div class="err-msg">Please enter a valid email.</div></div>
+          <div class="field w3"><label for="phone">Phone <span class="opt" id="phoneOpt"></span></label><input id="phone" name="phone" type="tel" autocomplete="tel"><div class="hint" id="phoneHint"></div><div class="err-msg">A phone number is required for international shipments (customs).</div></div>
+        </div>
+        <div class="preview" aria-live="polite">
+          <h3>Your shipping label will read</h3>
+          <pre id="labelPreview"></pre>
+        </div>
+      </div>
+    </fieldset>
+
+    <div id="afterAddress" hidden>
+      <fieldset>
+        <legend><span class="step">3</span>Your order</legend>
+        <div class="field" style="max-width:220px"><label for="quantity">How many mousepads?</label><select id="quantity" name="quantity" required></select></div>
+        <div class="field"><label class="check"><input type="checkbox" id="confirmAddr" required><span>The shipping label above is correct.</span></label><div class="err-msg">Please check your label and confirm it.</div></div>
+        <div class="field"><label class="check"><input type="checkbox" id="consent" required><span>I agree that Crystaphase may use this information to ship my mousepad and contact me about it. See our privacy statement.</span></label><div class="err-msg">Please check the box to continue.</div></div>
+      </fieldset>
+      <div class="hp" aria-hidden="true"><label for="website">Leave blank</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" id="submitBtn">Request my mousepad</button>
+      <p class="note">One request per person, please. To change something, submit again with the same email and we'll update your order.</p>
+    </div>
+  </form>
+
+  <section class="thanks" id="thanks" aria-live="polite">
+    <h2>You're on the list.</h2>
+    <p>We ship every Friday. You'll get a tracking email when yours goes out.</p>
+    <p class="note">Questions? <a href="mailto:info@crystaphase.com">info@crystaphase.com</a> · 281.874.2110</p>
+  </section>
+</main>
+
+<script>
+(function(){
+  // ============ CONFIG ============
+  var ENDPOINT_URL = "PASTE_POWER_AUTOMATE_OR_ZAPIER_WEBHOOK_URL_HERE";
+  var ART_URL = "assets/mousepad-2027.webp";
+  var CAMPAIGN = "mousepad-2027";
+  var MAX_QTY = 10;
+  // ================================
+
+  if (ART_URL) { var art = document.getElementById("art"); art.src = ART_URL; art.className = "art"; }
+
+  // ---- Option lists ----
+  var US_STATES = "AL Alabama|AK Alaska|AZ Arizona|AR Arkansas|CA California|CO Colorado|CT Connecticut|DE Delaware|DC District of Columbia|FL Florida|GA Georgia|HI Hawaii|ID Idaho|IL Illinois|IN Indiana|IA Iowa|KS Kansas|KY Kentucky|LA Louisiana|ME Maine|MD Maryland|MA Massachusetts|MI Michigan|MN Minnesota|MS Mississippi|MO Missouri|MT Montana|NE Nebraska|NV Nevada|NH New Hampshire|NJ New Jersey|NM New Mexico|NY New York|NC North Carolina|ND North Dakota|OH Ohio|OK Oklahoma|OR Oregon|PA Pennsylvania|PR Puerto Rico|RI Rhode Island|SC South Carolina|SD South Dakota|TN Tennessee|TX Texas|UT Utah|VT Vermont|VA Virginia|WA Washington|WV West Virginia|WI Wisconsin|WY Wyoming";
+  var CA_PROV = "AB Alberta|BC British Columbia|MB Manitoba|NB New Brunswick|NL Newfoundland and Labrador|NS Nova Scotia|NT Northwest Territories|NU Nunavut|ON Ontario|PE Prince Edward Island|QC Quebec|SK Saskatchewan|YT Yukon";
+  var MX_STATES = "Aguascalientes|Baja California|Baja California Sur|Campeche|Chiapas|Chihuahua|Ciudad de México|Coahuila|Colima|Durango|Estado de México|Guanajuato|Guerrero|Hidalgo|Jalisco|Michoacán|Morelos|Nayarit|Nuevo León|Oaxaca|Puebla|Querétaro|Quintana Roo|San Luis Potosí|Sinaloa|Sonora|Tabasco|Tamaulipas|Tlaxcala|Veracruz|Yucatán|Zacatecas";
+  var BR_STATES = "AC Acre|AL Alagoas|AP Amapá|AM Amazonas|BA Bahia|CE Ceará|DF Distrito Federal|ES Espírito Santo|GO Goiás|MA Maranhão|MT Mato Grosso|MS Mato Grosso do Sul|MG Minas Gerais|PA Pará|PB Paraíba|PR Paraná|PE Pernambuco|PI Piauí|RJ Rio de Janeiro|RN Rio Grande do Norte|RS Rio Grande do Sul|RO Rondônia|RR Roraima|SC Santa Catarina|SP São Paulo|SE Sergipe|TO Tocantins";
+  var IN_STATES = "Andhra Pradesh|Assam|Bihar|Chhattisgarh|Delhi|Goa|Gujarat|Haryana|Himachal Pradesh|Jharkhand|Karnataka|Kerala|Madhya Pradesh|Maharashtra|Odisha|Punjab|Rajasthan|Tamil Nadu|Telangana|Uttar Pradesh|Uttarakhand|West Bengal";
+  var AR_PROV = "Buenos Aires|Ciudad Autónoma de Buenos Aires|Catamarca|Chaco|Chubut|Córdoba|Corrientes|Entre Ríos|Formosa|Jujuy|La Pampa|La Rioja|Mendoza|Misiones|Neuquén|Río Negro|Salta|San Juan|San Luis|Santa Cruz|Santa Fe|Santiago del Estero|Tierra del Fuego|Tucumán";
+  var JM_PARISH = "Kingston|St. Andrew|St. Thomas|Portland|St. Mary|St. Ann|Trelawny|St. James|Hanover|Westmoreland|St. Elizabeth|Manchester|Clarendon|St. Catherine";
+  var AU_STATES = "ACT Australian Capital Territory|NSW New South Wales|NT Northern Territory|QLD Queensland|SA South Australia|TAS Tasmania|VIC Victoria|WA Western Australia";
+  function opts(s, useCode){ return s.split("|").map(function(x){ var sp=x.indexOf(" "); return useCode===false||sp<0 ? {v:x,t:x} : {v:x.slice(0,sp), t:x.slice(sp+1)}; }); }
+
+  // ---- Field library ----
+  // w = grid width (of 6). pat = postal regex. up = uppercase.
+  function F(k, label, o){ o=o||{}; o.k=k; o.label=label; return o; }
+  var L1 = function(l,h){ return F("line1", l||"Street address", {req:true, w:6, ac:"address-line1", hint:h}); };
+  var L2 = function(l,h){ return F("line2", l||"Building, suite, mail stop", {w:6, ac:"address-line2", hint:h}); };
+  var CITY = function(l,w){ return F("city", l||"City", {req:true, w:w||3, ac:"address-level2"}); };
+  var PC = function(l,pat,w,h,ex){ return F("postalCode", l||"Postal code", {req:true, w:w||3, ac:"postal-code", pat:pat, hint:h, up:true, ex:ex}); };
+  var REG = function(l,list,w,req,useCode){ return F("region", l, {req:req!==false, w:w||3, ac:"address-level1", list:list?opts(list,useCode):null}); };
+
+  // ---- Country templates ----
+  // fields: what to show, in local order. label: lines for the shipping label.
+  var FORMATS = {
+    US:{ fields:[L1(),L2("Apt, suite, building, mail stop"),CITY("City",2),REG("State",US_STATES,2),PC("ZIP code",/^\d{5}(-\d{4})?$/,2,null,"77002")],
+         label:["{line1}","{line2}","{city}, {region} {postalCode}"] },
+    CA:{ fields:[L1(),L2("Unit, suite, building"),CITY("City",2),REG("Province",CA_PROV,2),PC("Postal code",/^[A-Z]\d[A-Z] ?\d[A-Z]\d$/i,2,null,"T2E 7N6")],
+         label:["{line1}","{line2}","{city} {region}  {postalCode}"] },
+    MX:{ fields:[L1("Street and number (Calle y número)","e.g., Francisco Sarabia 54"),F("locality","Neighborhood (Colonia)",{req:true,w:6}),L2("Building, floor, reference"),PC("Postal code (C.P.)",/^\d{5}$/,2,null,"96740"),CITY("City / municipality (Municipio)",2),REG("State (Estado)",MX_STATES,2,true,false)],
+         label:["{line1}","{line2}","Col. {locality}","{postalCode} {city}, {region}"] },
+    GB:{ fields:[L1("Address line 1"),L2("Address line 2"),CITY("Town / city"),F("region","County",{w:3,ac:"address-level1"}),PC("Postcode",/^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/i,3,null,"SA71 5SJ")],
+         label:["{line1}","{line2}","{city}","{region}","{postalCode}"] },
+    // Most of continental Europe: street + number, then POSTAL CODE before CITY
+    EU:{ fields:[L1("Street and house number","e.g., Neuenkirchener Str. 8"),L2("Building, floor, department"),PC("Postal code",null,2),CITY("City",4)],
+         label:["{line1}","{line2}","{postalCode} {city}"] },
+    ES:{ fields:[L1("Street, number, floor, door","e.g., Plaza Manuel Rodrigo 1, Portal B, 3E"),L2("Building, department"),PC("Postal code (Código postal)",/^\d{5}$/,2,null,"28043"),CITY("City",2),REG("Province",null,2)],
+         label:["{line1}","{line2}","{postalCode} {city}","{region}"] },
+    PT:{ fields:[L1("Street, number, floor","e.g., Av. de Santiago, nº 34, 2º dto"),L2("Building, department"),PC("Postal code",/^\d{4}-\d{3}$/,2,"Format 0000-000","7500-200"),CITY("City / locality",4)],
+         label:["{line1}","{line2}","{postalCode} {city}"] },
+    IT:{ fields:[L1("Street and number","e.g., Via Pasteur 14"),L2("Building, floor"),PC("CAP",/^\d{5}$/,2,null,"09126"),CITY("City",2),REG("Province (e.g., CA, MI)",null,2)],
+         label:["{line1}","{line2}","{postalCode} {city} {region}"] },
+    NL:{ fields:[L1("Street and house number"),L2("Building, floor"),PC("Postcode",/^\d{4} ?[A-Z]{2}$/i,2,null,"3011 AB"),CITY("City",4)],
+         label:["{line1}","{line2}","{postalCode}  {city}"] },
+    SE:{ fields:[L1("Street address"),L2("c/o, building"),PC("Postal code",/^\d{3} ?\d{2}$/,2,null,"418 34"),CITY("City",4)],
+         label:["{line1}","{line2}","{postalCode} {city}"] },
+    BR:{ fields:[L1("Street, number (Rua, número)","e.g., Rua Gustavo Maciel, 17-49"),L2("Apartment, complement (Complemento)"),F("locality","Neighborhood (Bairro)",{req:true,w:6}),PC("CEP",/^\d{5}-?\d{3}$/,2,null,"17012-110"),CITY("City",2),REG("State",BR_STATES,2)],
+         label:["{line1}","{line2}","{locality}","{city} - {region}","{postalCode}"] },
+    AR:{ fields:[L1("Street and number","e.g., Sargento Ponce 2318"),L2("Floor, apartment, building"),PC("Postal code",null,2,null,"B1871DCR"),CITY("City / locality",2),REG("Province",AR_PROV,2,true,false)],
+         label:["{line1}","{line2}","{postalCode} {city}","{region}"] },
+    IN:{ fields:[L1("Building, plot, street","e.g., Plot 214, Phase 2, GIDC"),L2("Area, landmark"),CITY("City / town",2),F("district","District",{w:2}),REG("State",IN_STATES,2,true,false),PC("PIN code",/^\d{6}$/,2,null,"363035")],
+         label:["{line1}","{line2}","{city} {district}","{region} {postalCode}"] },
+    JM:{ fields:[L1(),L2("Building, suite"),CITY("Town / post office",3),REG("Parish",JM_PARISH,3,true,false)],
+         label:["{line1}","{line2}","{city}","{region}"] },
+    TR:{ fields:[L1("Neighborhood, street, number","e.g., Siteler Mah. N. Giritlioğlu Cd. No.6/1"),L2("Building, floor"),PC("Postal code",/^\d{5}$/,2,null,"35800"),F("district","District (İlçe)",{req:true,w:2}),REG("Province (İl)",null,2)],
+         label:["{line1}","{line2}","{postalCode} {district}/{region}"] },
+    AU:{ fields:[L1(),L2("Unit, building"),CITY("Suburb",2),REG("State",AU_STATES,2),PC("Postcode",/^\d{4}$/,2,null,"2000")],
+         label:["{line1}","{line2}","{city} {region} {postalCode}"] },
+    JP:{ fields:[PC("Postal code",/^\d{3}-?\d{4}$/,2,null,"100-0005"),REG("Prefecture",null,4),CITY("City / ward",6),L1("Town, block, building number"),L2("Building name, floor, room")],
+         label:["{line1}","{line2}","{city}, {region}","{postalCode}"] },
+    KR:{ fields:[L1("Street address (road name)"),L2("Building, floor, room"),CITY("City / district",2),REG("Province / metro city",null,2),PC("Postal code",/^\d{5}$/,2)],
+         label:["{line1}","{line2}","{city}, {region}","{postalCode}"] },
+    SG:{ fields:[L1("Block, street"),L2("Floor-unit, building"),PC("Postal code",/^\d{6}$/,3)],
+         label:["{line1}","{line2}","Singapore {postalCode}"] },
+    AE:{ fields:[L1("Building, street"),L2("Office, floor, P.O. Box"),F("locality","Area",{w:3}),REG("Emirate","Abu Dhabi|Ajman|Dubai|Fujairah|Ras Al Khaimah|Sharjah|Umm Al Quwain",3,true,false)],
+         label:["{line1}","{line2}","{locality}","{region}"] },
+    INTL:{ fields:[L1("Address line 1"),L2("Address line 2"),CITY("City / town"),F("region","State / province / region",{w:3}),PC("Postal code",null,3,"Leave blank if your country doesn't use one")],
+         label:["{line1}","{line2}","{postalCode} {city}","{region}"], postalOptional:true }
+  };
+
+  // ---- Countries (name, ISO-2, template) ----
+  var COUNTRY_LIST = [
+    ["Argentina","AR","AR"],
+    ["Australia","AU","AU"],
+    ["Austria","AT","EU"],
+    ["Belgium","BE","EU"],
+    ["Brazil","BR","BR"],
+    ["Bulgaria","BG","EU"],
+    ["Canada","CA","CA"],
+    ["Chile","CL","INTL"],
+    ["China","CN","INTL"],
+    ["Colombia","CO","INTL"],
+    ["Croatia","HR","EU"],
+    ["Czech Republic","CZ","EU"],
+    ["Denmark","DK","EU"],
+    ["Ecuador","EC","INTL"],
+    ["Egypt","EG","INTL"],
+    ["Finland","FI","EU"],
+    ["France","FR","EU"],
+    ["Germany","DE","EU"],
+    ["Greece","GR","EU"],
+    ["Hungary","HU","EU"],
+    ["India","IN","IN"],
+    ["Indonesia","ID","INTL"],
+    ["Ireland","IE","INTL"],
+    ["Israel","IL","EU"],
+    ["Italy","IT","IT"],
+    ["Jamaica","JM","JM"],
+    ["Japan","JP","JP"],
+    ["Kazakhstan","KZ","INTL"],
+    ["Kuwait","KW","INTL"],
+    ["Lithuania","LT","EU"],
+    ["Malaysia","MY","INTL"],
+    ["Mexico","MX","MX"],
+    ["Netherlands","NL","NL"],
+    ["New Zealand","NZ","INTL"],
+    ["Norway","NO","EU"],
+    ["Oman","OM","INTL"],
+    ["Peru","PE","INTL"],
+    ["Philippines","PH","INTL"],
+    ["Poland","PL","EU"],
+    ["Portugal","PT","PT"],
+    ["Qatar","QA","INTL"],
+    ["Romania","RO","EU"],
+    ["Saudi Arabia","SA","INTL"],
+    ["Serbia","RS","EU"],
+    ["Singapore","SG","SG"],
+    ["Slovakia","SK","EU"],
+    ["Slovenia","SI","EU"],
+    ["South Africa","ZA","INTL"],
+    ["South Korea","KR","KR"],
+    ["Spain","ES","ES"],
+    ["Sweden","SE","SE"],
+    ["Switzerland","CH","EU"],
+    ["Taiwan","TW","INTL"],
+    ["Thailand","TH","INTL"],
+    ["Trinidad and Tobago","TT","INTL"],
+    ["Turkey (Türkiye)","TR","TR"],
+    ["United Arab Emirates","AE","AE"],
+    ["United Kingdom","GB","GB"],
+    ["United States","US","US"],
+    ["Uruguay","UY","EU"],
+    ["Venezuela","VE","INTL"],
+    ["Vietnam","VN","INTL"],
+    ["Other country","ZZ","INTL"]
+  ];
+
+  // ---- Build country select (alphabetical, no pinned countries) ----
+  var cSel = document.getElementById("country");
+  var html = '<option value="">Select a country</option>';
+  COUNTRY_LIST.forEach(function(c){ html += '<option value="'+c[1]+'">'+c[0]+'</option>'; });
+  cSel.innerHTML = html;
+
+  var qSel = document.getElementById("quantity");
+  for (var i=1;i<=MAX_QTY;i++){ var o=document.createElement("option"); o.value=i; o.textContent=i; qSel.appendChild(o); }
+
+  var addrWrap = document.getElementById("addrFields");
+  var current = null, currentCode = "";
+
+  function fieldHTML(f){
+    var id="a_"+f.k, req=f.req && !(f.k==="postalCode" && current.postalOptional);
+    var lab = f.label + (req ? "" : ' <span class="opt">(optional)</span>');
+    var ctl;
+    if(f.list){
+      ctl = '<select id="'+id+'" data-k="'+f.k+'" autocomplete="'+(f.ac||"off")+'"'+(req?" required":"")+'><option value="">Select</option>'+
+        f.list.map(function(o){return '<option value="'+o.v+'">'+o.t+'</option>';}).join("")+'</select>';
+    } else {
+      ctl = '<input id="'+id+'" data-k="'+f.k+'" autocomplete="'+(f.ac||"off")+'"'+(req?" required":"")+(f.ex?' placeholder="'+f.ex+'"':"")+'>';
+    }
+    return '<div class="field w'+(f.w||6)+'"><label for="'+id+'">'+lab+'</label>'+ctl+
+      (f.hint?'<div class="hint">'+f.hint+'</div>':"")+
+      '<div class="err-msg">'+(f.pat?"Please check the format"+(f.ex?" (e.g., "+f.ex+")":"")+".":"This field is required.")+'</div></div>';
+  }
+
+  function renderCountry(){
+    currentCode = cSel.value;
+    var picked = COUNTRY_LIST.filter(function(c){return c[1]===currentCode;})[0];
+    var ok = !!picked;
+    document.getElementById("addressBlock").hidden = !ok;
+    document.getElementById("afterAddress").hidden = !ok;
+    document.getElementById("lockedMsg").hidden = ok;
+    if(!ok) return;
+    // keep anything already typed if the same field exists in the new template
+    var keep = {}; addrWrap.querySelectorAll("[data-k]").forEach(function(el){ keep[el.dataset.k]=el.value; });
+    current = FORMATS[picked[2]];
+    addrWrap.innerHTML = current.fields.map(fieldHTML).join("");
+    addrWrap.querySelectorAll("[data-k]").forEach(function(el){ if(keep[el.dataset.k] && el.tagName==="INPUT") el.value=keep[el.dataset.k]; });
+    var intl = currentCode!=="US";
+    var ph=document.getElementById("phone"); ph.required=intl;
+    document.getElementById("phoneOpt").textContent = intl ? "(required for customs)" : "(optional)";
+    document.getElementById("phoneHint").textContent = intl ? "Include the country code, e.g., +34 91 123 4567" : "Carriers use this if there's a delivery question.";
+    document.getElementById("confirmAddr").checked=false;
+    updatePreview();
+  }
+  cSel.addEventListener("change", renderCountry);
+
+  function values(){
+    var v = {};
+    addrWrap.querySelectorAll("[data-k]").forEach(function(el){
+      var f = current.fields.filter(function(x){return x.k===el.dataset.k;})[0];
+      var val = el.value.trim();
+      if(f && f.up) val = val.toUpperCase();
+      if(f && f.k==="postalCode" && currentCode==="CA") val = val.replace(/\s+/g,"").replace(/^(.{3})(.+)$/,"$1 $2");
+      if(f && f.k==="postalCode" && currentCode==="GB") val = val.replace(/\s+/g,"").replace(/^(.+)(.{3})$/,"$1 $2");
+      v[el.dataset.k] = val;
+    });
+    return v;
+  }
+
+  function buildLabel(){
+    if(!current) return "";
+    var v = values();
+    var name = [val("firstName"),val("lastName")].filter(Boolean).join(" ");
+    var lines = [name, val("company")];
+    current.label.forEach(function(t){
+      var line = t.replace(/\{(\w+)\}/g, function(_,k){ return v[k]||""; })
+                  .replace(/^Col\.\s*$/,"")
+                  .replace(/\s*[,\-\/]\s*$/,"").replace(/^\s*[,\-\/]\s*/,"")
+                  .replace(/\s{3,}/g,"  ").trim();
+      lines.push(line);
+    });
+    var cn = COUNTRY_LIST.filter(function(c){return c[1]===currentCode;})[0];
+    if(currentCode!=="US") lines.push((cn[1]==="ZZ" ? "" : cn[0].replace(/ \(.*\)/,"")).toUpperCase());
+    return lines.filter(function(l,i,a){return l && l.trim() && l!==a[i-1];}).join("\n");
+  }
+  function val(id){ return document.getElementById(id).value.trim(); }
+  function updatePreview(){
+    var t = buildLabel();
+    document.getElementById("labelPreview").textContent = t || "Start typing your address…";
+  }
+  document.getElementById("mp-form").addEventListener("input", function(e){ if(e.target.type!=="checkbox") { document.getElementById("confirmAddr").checked=false; } updatePreview(); });
+  document.getElementById("mp-form").addEventListener("change", function(e){ if(e.target.tagName==="SELECT" && e.target.id!=="quantity" && e.target.id!=="country") document.getElementById("confirmAddr").checked=false; });
+  document.getElementById("mp-form").addEventListener("change", updatePreview);
+
+  // ---- Validation + submit ----
+  var form=document.getElementById("mp-form"), banner=document.getElementById("banner"), btn=document.getElementById("submitBtn");
+  function validate(){
+    var ok=true, first=null;
+    form.querySelectorAll("input,select").forEach(function(el){
+      if(el.id==="website") return;
+      var wrap=el.closest(".field"); if(!wrap || wrap.closest("[hidden]")) return;
+      var has = el.type==="checkbox" ? el.checked : el.value.trim()!=="";
+      var bad = el.required && !has;
+      if(!bad && has && el.type==="email") bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+      if(!bad && has && el.dataset.k){
+        var f = current.fields.filter(function(x){return x.k===el.dataset.k;})[0];
+        if(f && f.pat) bad = !f.pat.test(el.value.trim());
+      }
+      wrap.classList.toggle("invalid", bad);
+      if(bad){ ok=false; if(!first) first=el; }
+    });
+    if(first) first.focus();
+    return ok;
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    banner.className="banner";
+    if(document.getElementById("website").value) return;
+    if(!validate()) return;
+    var cn = COUNTRY_LIST.filter(function(c){return c[1]===currentCode;})[0];
+    var a = values();
+    var d = {
+      firstName: val("firstName"), lastName: val("lastName"), company: val("company"),
+      email: val("email").toLowerCase(), phone: val("phone"),
+      quantity: Number(qSel.value),
+      countryName: cn[0], countryCode: cn[1]==="ZZ" ? "" : cn[1],
+      line1: a.line1||"", line2: a.line2||"", locality: a.locality||"", city: a.city||"",
+      district: a.district||"", region: a.region||"", postalCode: a.postalCode||"",
+      labelAddress: buildLabel(),
+      consent: true, campaign: CAMPAIGN, submittedAt: new Date().toISOString(), source: location.href
+    };
+    var p = new URLSearchParams(location.search);
+    ["utm_source","utm_medium","utm_campaign","utm_content"].forEach(function(k){ if(p.get(k)) d[k]=p.get(k); });
+
+    btn.disabled=true; btn.textContent="Sending…";
+    fetch(ENDPOINT_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); form.style.display="none"; document.getElementById("thanks").style.display="block"; window.scrollTo(0,0); })
+      .catch(function(){ banner.textContent="Something went wrong sending your request. Please try again, or email info@crystaphase.com."; banner.className="banner err"; })
+      .finally(function(){ btn.disabled=false; btn.textContent="Request my mousepad"; });
+  });
+})();
+</script>
+</body>
+</html>

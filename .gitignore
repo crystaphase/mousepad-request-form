@@ -1,0 +1,6 @@
+# Public repo (GitHub Pages preview): publish only the page and its art.
+# tests/ holds real 2025 customer addresses; CLAUDE.md and design files stay local.
+/*
+!/index.html
+!/assets/
+!/.gitignore
