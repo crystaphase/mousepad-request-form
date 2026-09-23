@@ -8,7 +8,8 @@
 <!--
   CRYSTAPHASE 2027 MOUSEPAD REQUEST FORM  (country-first addresses)
   -----------------------------------------------------------------
-  Drop-in page (or embed the <main> block) for crystaphase.com/mousepad.
+  Drop-in page (or embed the <main> block, which leaves out the site header
+  and footer) for crystaphase.com/mousepad.
 
   HOW IT WORKS
   - Step 1: the requester picks the destination country.
@@ -44,10 +45,47 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:"Avenir Next","Avenir Next LT Pro",Avenir,"Segoe UI",Arial,sans-serif;line-height:1.5}
-  main{max-width:760px;margin:0 auto;padding:32px 16px 64px}
   .hero{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;margin-bottom:28px}
   .hero img{width:100%;border:1px solid var(--line);background:#fff}
   .hero img.art{border:0;background:none;height:auto}
+  /* Site header and footer: match crystaphase.com */
+  .site-header{background:#fff;border-bottom:1px solid #e6e6e6}
+  .site-bar{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:28px}
+  .site-header .site-bar{height:80px}
+  .site-logo svg{display:block;height:64px;width:auto}
+  .site-nav{display:flex;gap:26px;margin-left:auto}
+  .site-nav a{color:#5d5d5d;text-decoration:none}
+  .site-nav a:hover{color:#46af91}
+  .site-cta{background:#46af91;color:#fff;text-decoration:none;text-transform:uppercase;font-weight:700;font-size:.8rem;letter-spacing:.04em;padding:14px 22px;white-space:nowrap}
+  .site-cta:hover{background:#3b9a7f}
+  .site-footer{background:#fff;border-top:1px solid #d7d7d7;font-size:.9rem;color:#797979}
+  .site-footer .site-bar{justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:20px;padding-bottom:20px}
+  .site-footer nav{display:flex;flex-wrap:wrap;gap:6px 20px}
+  .site-footer a{color:#797979;text-decoration:none}
+  .site-footer a:hover{color:#46af91}
+
+  /* Night sky with the Crystaphase signal */
+  .night{position:relative;overflow:hidden;padding:clamp(150px,19vw,200px) 16px 130px;
+    background:linear-gradient(180deg,#09131d 0%,#0f2334 65%,#173450 100%)}
+  .night::before{content:"";position:absolute;inset:0;opacity:.8;background-image:
+    radial-gradient(1.5px 1.5px at 7% 14%,#fff,transparent),radial-gradient(1px 1px at 18% 40%,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 31% 9%,#fff,transparent),radial-gradient(1px 1px at 44% 26%,#fff,transparent),
+    radial-gradient(1px 1px at 52% 6%,#fff,transparent),radial-gradient(1.5px 1.5px at 63% 33%,#fff,transparent),
+    radial-gradient(1px 1px at 88% 52%,#fff,transparent),radial-gradient(1px 1px at 95% 12%,#fff,transparent),
+    radial-gradient(1px 1px at 3% 58%,#fff,transparent),radial-gradient(1.5px 1.5px at 26% 64%,#fff,transparent)}
+  .bat-signal{position:absolute;top:14px;right:max(16px,calc(50% - 490px));width:clamp(170px,24vw,290px);overflow:visible;pointer-events:none}
+  .skyline{position:absolute;left:0;bottom:0;width:100%;height:120px;pointer-events:none}
+  .night .hero{position:relative;z-index:1;max-width:960px;margin:0 auto;grid-template-columns:1fr 1.1fr;gap:48px}
+  .night .eyebrow{color:#4dc0a1}
+  .night h1{color:#fff;font-size:2.5rem}
+  .night .lead{color:rgba(255,255,255,.8)}
+  .wrap{position:relative;z-index:1;max-width:760px;margin:-44px auto 0;padding:0 16px 64px}
+
+  /* The mousepad on a desk: tilt, rubber edge, shadow, and a mouse */
+  .pad{position:relative;transform:perspective(1600px) rotateX(16deg) rotateZ(-4deg);transform-origin:50% 60%;
+    filter:drop-shadow(0 4px 0 #060a09) drop-shadow(0 24px 22px rgba(0,0,0,.6))}
+  .pad img{display:block}
+  .mouse{position:absolute;width:14%;right:-6%;bottom:4%;transform:rotate(16deg);filter:drop-shadow(-5px 12px 7px rgba(0,0,0,.55))}
   .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 6px}
   h1{font-size:2rem;line-height:1.15;margin:0 0 12px}
   .lead{color:var(--muted);margin:0}
@@ -82,7 +120,18 @@
   .banner.err{display:block;background:#fdecee;color:var(--err);border:1px solid #f3c2c9}
   .thanks{display:none;background:var(--card);border:1px solid var(--line);padding:36px;text-align:center}
   .thanks h2{margin:0 0 8px}
+  @media (max-width:900px){ .site-nav{display:none} .site-cta{margin-left:auto} }
   @media (max-width:640px){
+    .site-nav{display:none}
+    .site-cta{margin-left:auto;padding:10px 14px;font-size:.72rem}
+    .site-header .site-bar{height:64px}
+    .site-logo svg{height:42px}
+    .night{padding-top:120px}
+    .bat-signal{width:150px;top:8px}
+    .night h1{font-size:1.9rem}
+    .night .hero{grid-template-columns:1fr;gap:32px}
+    .mouse{right:3%;bottom:6%}
+    .pad{transform:perspective(1200px) rotateX(12deg) rotateZ(-3deg)}
     .hero{grid-template-columns:1fr}
     .w4,.w3,.w2{grid-column:span 6}
     h1{font-size:1.6rem}
@@ -91,16 +140,65 @@
 </style>
 </head>
 <body>
+<header class="site-header">
+  <div class="site-bar">
+    <a class="site-logo" href="https://www.crystaphase.com/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 110" role="img" aria-label="Crystaphase"><g><g><g><g><g><path fill="#4DC0A1" d="M119.1,60.9c0.3,0.3,0.3,0.7,0,1c-1.9,1.6-4.3,2.6-7,2.6c-5.8,0-10.5-4.5-10.5-10.1 c0-5.6,4.7-10.1,10.5-10.1c3,0,5.7,1.2,7.5,3.1h0l-1.3,3.1c-0.1,0.3-0.5,0.5-0.8,0.4l-0.8-0.2c0,0-1.2-0.4-1.2-1.7v-0.4 c-1.1-0.6-2.3-1-3.6-1c-3.8,0-6.9,3.1-6.9,7c0,3.9,3.1,7,6.9,7c1.8,0,3.4-0.7,4.7-1.8c0.2-0.2,0.6-0.2,0.8,0L119.1,60.9z"/><path fill="#4DC0A1" d="M128.9,64.2h-6.7c-0.3,0-0.6-0.3-0.6-0.6v-0.9c0-0.9,0.9-1.1,0.9-1.1l1.2-0.3v-8.7 l-1.2-0.3c0,0-0.9-0.3-0.9-1.1v-0.9c0-0.3,0.3-0.6,0.6-0.6h4.2c0.3,0,0.6,0.3,0.6,0.6l0,0.6V51c1.7-1.7,3.6-1.8,4.5-1.7 c0.3,0,0.6,0.3,0.6,0.6l0,2.1c0,0.4-0.3,0.7-0.7,0.6c-1.5-0.2-4.4,0.1-4.4,3.4v5.1l1.5,0.3c0,0,0.9,0.3,0.9,1.1v0.9 C129.5,63.9,129.3,64.2,128.9,64.2z"/><path fill="#4DC0A1" d="M145.4,49.7h3.3c0.3,0,0.6,0.3,0.6,0.6v0.9c0,0.9-0.9,1.1-0.9,1.1l-1,0.2l-3.8,9.2 c-1.7,4.1-3.8,7.3-6,9c-0.3,0.2-0.7,0.1-0.9-0.1l-1-1.4c-0.3-0.4-0.3-0.8,0-1c1.4-1.2,2.4-2.4,3.4-4.2c0.4-0.8,0.5-1.8,0.1-2.7 c-1.2-2.8-3.7-8.8-3.7-8.8l-0.8-0.2c0,0-0.9-0.3-0.9-1.1v-0.9c0-0.3,0.3-0.6,0.6-0.6h3c0.3,0,0.5,0.2,0.6,0.4l3.4,8.5l3.4-8.5 C145,49.8,145.2,49.7,145.4,49.7z"/><path fill="#4DC0A1" d="M163.4,60.1c0,2.2-1.8,4.4-6.7,4.4c-2.4,0-4.7-0.8-6.2-1.8c-0.3-0.2-0.4-0.6-0.1-0.9 l1.3-1.6c0.2-0.3,0.6-0.3,0.9-0.1c1,0.8,2.7,1.4,4.2,1.4c1.7,0,2.8-0.6,2.8-1.3c0-2.3-9.2-0.9-9.2-6.3c0-2.2,2.3-4.7,6.4-4.7 c2.3,0,4.3,0.8,5.5,1.8c0.2,0.2,0.3,0.5,0.2,0.7l-1,2.7c-0.1,0.3-0.4,0.5-0.8,0.4l-1-0.3c0,0-1.3-0.4-1.3-1.7v-0.3 c-0.4-0.2-1-0.3-1.6-0.3c-1.4,0-2.6,0.7-2.6,1.6C154.3,56.4,163.4,55.2,163.4,60.1z"/><path fill="#4DC0A1" d="M170.2,49.7h3.1c0.3,0,0.6,0.3,0.6,0.6v1.6c0,0.3-0.3,0.6-0.6,0.6h-3.1v6.9 c0,1.1,0.5,2.2,1.5,2.2c0.3,0,0.8-0.1,1.2-0.3c0.3-0.1,0.7,0,0.8,0.3l0.6,1.4c0.2,0.5,0.1,0.8-0.2,1c-0.6,0.3-1.5,0.6-2.4,0.6 c-3.4,0-5-2-5-5.2v-6.9h-1.2c-0.3,0-0.6-0.3-0.6-0.6v-1.6c0-0.3,0.3-0.6,0.6-0.6h1.3l0.5-2.5c0,0,0.3-0.9,1.1-0.9h1 c0.3,0,0.6,0.3,0.6,0.6V49.7z"/><path fill="#4DC0A1" d="M223.1,56.1c0-1.9-0.7-3.9-3.1-3.9c-2.9,0-3.7,2.4-3.7,4.6v4.6l1.2,0.3 c0,0,0.9,0.3,0.9,1.1v0.9c0,0.3-0.3,0.6-0.6,0.6h-6.4c-0.3,0-0.6-0.3-0.6-0.6v-0.9c0-0.9,0.9-1.1,0.9-1.1l1.2-0.3V47.2 l-1.2-0.3c0,0-0.9-0.3-0.9-1.1v-0.9c0-0.3,0.3-0.6,0.6-0.6h4.3c0.3,0,0.6,0.3,0.6,0.6v7c0.5-0.9,1.6-2.6,4.9-2.6 c3.7,0,5.3,2.9,5.3,6.3"/><path fill="#4DC0A1" d="M226.7,55.6v5.7l1.2,0.3c0,0,0.9,0.3,0.9,1.1v0.9c0,0.3-0.3,0.6-0.6,0.6h-4.3 c-0.3,0-0.6-0.3-0.6-0.6v-7.5"/><path fill="#4DC0A1" d="M239.8,62.1c0,0-1,2.4-4.5,2.4c-3.4,0-5.4-2.2-5.4-4.5c0-6.6,9.9-4.2,9.9-4.2 c0-4.2-3.7-4.5-6.5-2.2c-0.3,0.2-0.6,0.2-0.8,0l-1.2-1.1c-0.4-0.4-0.4-0.8-0.1-1c0.8-0.8,2.8-2.1,5.9-2.1 c4.6,0,6.2,2.9,6.2,7.2v3.9c0,0.5,0.3,0.7,0.6,0.8c0.3,0.1,0.5,0.4,0.4,0.7l-0.3,1.8c-0.1,0.3-0.3,0.5-0.6,0.5 C242.3,64.2,240.4,64,239.8,62.1z M239.7,58.2c0,0-6.5-1.4-6.5,1.7c0,1.3,1.6,1.9,3.2,1.9c1.8,0,3.3-1.5,3.3-3.2V58.2z"/><path fill="#4DC0A1" d="M259.3,60.1c0,2.2-1.8,4.4-6.7,4.4c-2.4,0-4.7-0.8-6.2-1.8c-0.3-0.2-0.4-0.6-0.1-0.9 l1.3-1.6c0.2-0.3,0.6-0.3,0.9-0.1c1,0.8,2.7,1.4,4.2,1.4c1.7,0,2.8-0.6,2.8-1.3c0-2.3-9.2-0.9-9.2-6.3c0-2.2,2.3-4.7,6.4-4.7 c2.3,0,4.3,0.8,5.5,1.8c0.2,0.2,0.3,0.5,0.2,0.7l-1,2.7c-0.1,0.3-0.4,0.5-0.8,0.4l-1-0.3c0,0-1.3-0.4-1.3-1.7v-0.3 c-0.4-0.2-1-0.3-1.6-0.3c-1.4,0-2.6,0.7-2.6,1.6C250.2,56.4,259.3,55.2,259.3,60.1z"/><path fill="#4DC0A1" d="M273.7,60.5l1.1,1.6c0.2,0.3,0.1,0.7-0.2,0.9c-1.7,1.1-3.5,1.6-5.9,1.6 c-4.7,0-7.6-3.3-7.6-7.5c0-3.4,2.2-6.5,5.5-7.4c5.4-1.5,9.9,3.1,9.4,8.1c0,0.3-0.3,0.5-0.6,0.5h-10.7c0.4,1.8,1.9,3.3,4.1,3.3 c1.5,0,3-0.5,4.2-1.2C273.2,60.1,273.5,60.2,273.7,60.5z M272.5,55.5c-0.5-1.7-2-3.1-3.9-3.1c-1.8,0-3.4,1.3-4,3.1H272.5z"/><path fill="#4DC0A1" d="M199.1,70.9h-6.4c-0.3,0-0.6-0.3-0.6-0.6v-0.9c0-0.9,0.9-1.1,0.9-1.1l1.2-0.3V52.6 l-1.2-0.3c0,0-0.9-0.3-0.9-1.1v-0.9c0-0.3,0.3-0.6,0.6-0.6h4.2c0.3,0,0.6,0.3,0.6,0.6l0.1,1.6c1.2-1.5,3-2.5,5-2.5 c3.8,0,6.8,3.4,6.8,7.6s-3,7.6-6.8,7.6c-2,0-3.8-1-5-2.5v5.8l1.2,0.3c0,0,0.9,0.3,0.9,1.1v0.9 C199.7,70.6,199.4,70.9,199.1,70.9z M197.5,57c0,2.5,1.9,4.5,4.3,4.5c2.4,0,4.3-2,4.3-4.5c0-2.5-1.9-4.5-4.3-4.5 C199.4,52.5,197.5,54.5,197.5,57z"/><path fill="#4DC0A1" d="M186.2,62.1c0,0-1,2.4-4.5,2.4c-3.4,0-5.4-2.2-5.4-4.5c0-6.6,9.9-4.2,9.9-4.2 c0-4.2-3.7-4.5-6.5-2.2c-0.3,0.2-0.6,0.2-0.8,0l-1.2-1.1c-0.4-0.4-0.4-0.8-0.1-1c0.8-0.8,2.8-2.1,5.9-2.1 c4.6,0,6.2,2.9,6.2,7.2v3.9c0,0.5,0.3,0.7,0.6,0.8c0.3,0.1,0.5,0.4,0.4,0.7l-0.3,1.8c-0.1,0.3-0.3,0.5-0.6,0.5 C188.7,64.2,186.8,64,186.2,62.1z M186.1,58.2c0,0-6.5-1.4-6.5,1.7c0,1.3,1.6,1.9,3.2,1.9c1.8,0,3.3-1.5,3.3-3.2V58.2z"/></g></g></g></g><path d="M7.5,83.4L47,106.2c2.2,1.3,4.9,1.3,7,0l38.8-22.4c1-0.6,1.6-1.6,1.6-2.8c0-1.2-0.6-2.2-1.5-2.8l0,0L78.1,68 c-0.4-0.2-0.8-0.6-1.1-0.9L65.1,52.2c-1-1.2-1.1-2.9-0.4-4.3l4.8-8.8c0.5-1,1.4-1.7,2.5-2.1l20.1-5.8c1.3-0.4,2.1-1.4,2.3-2.7 c0.1-1.3-0.5-2.5-1.6-3.2L54,2.9c-1.1-0.6-2.3-0.9-3.5-0.9c-1.2,0-2.4,0.3-3.5,0.9L7.5,25.6C5.3,26.9,4,29.2,4,31.7v45.6 C4,79.8,5.3,82.1,7.5,83.4z M47.3,101.8c-0.4,0.3-0.9,0.4-1.3,0.4c-0.4,0-0.8-0.1-1.2-0.3l-33-19c-1-0.6-1.6-1.6-1.8-2.7 c-0.1-1.2,0.3-2.3,1.2-3l9.4-8.1c1-0.9,2.5-1.3,3.8-0.9l6.1,1.5c0.7,0.2,1.4,0.4,2,0.8l3.7,2.1c1.1,0.6,2.1,1.5,2.8,2.6l7.4,11.3 c0.3,0.5,0.6,1.1,0.6,1.8l1.2,11.6C48.5,100.5,48.1,101.3,47.3,101.8z M23.8,61.6l0.5-4.5c0.1-0.9,0.6-1.6,1.3-2.1 c0.8-0.5,1.7-0.5,2.5-0.2l2,0.8c1.7,0.7,2.7,2.5,2.4,4.4l-0.7,3.6c-0.2,0.9-0.7,1.6-1.4,2.1c-0.5,0.3-1.1,0.5-1.7,0.5 c-0.3,0-0.5,0-0.8-0.1l-1.2-0.3C24.9,65.4,23.6,63.6,23.8,61.6z M47.2,65.6c-0.4,0.9-1,1.6-1.9,2.1L41,69.9 c-0.6,0.3-1.2,0.4-1.8,0.4c-0.7,0-1.3-0.2-1.9-0.5l-1.1-0.6c-1.5-0.8-2.3-2.5-2-4.2l1.3-6.5c0.2-1.1,0.9-2,1.8-2.6l7.6-4.7 c0.9-0.6,2-0.7,3.1-0.5l0.4,0.1c1.1,0.3,2,1,2.5,2c0.5,1,0.6,2.2,0.1,3.2L47.2,65.6z M49.6,70.7l1.9,1.3c1.8,1.2,2.3,3.6,1.2,5.4 l-2.3,3.7c-0.4,0.7-1.2,1.1-2,1.1c0,0,0,0,0,0c-0.8,0-1.6-0.4-2-1.1l-3-4.5c-0.6-0.9-0.8-2.1-0.5-3.2c0.3-1.1,1-2,2-2.5l0.8-0.4 C46.9,69.8,48.4,69.9,49.6,70.7z M78.5,71.4L89,78.9c0.7,0.4,1.1,1.2,1.1,2.1c0,0.9-0.5,1.6-1.2,2l-34.1,19.7 c-0.4,0.2-0.8,0.3-1.2,0.3c-0.4,0-0.8-0.1-1.1-0.3c-0.7-0.4-1.2-1.1-1.3-1.9l-1.3-12.6c-0.1-0.9,0.1-1.7,0.6-2.5l6-9.6 c0.5-0.9,1.4-1.5,2.4-1.7L74,70.6C75.6,70.3,77.1,70.5,78.5,71.4z M71.9,64.9c0.5,0.6,0.7,1.5,0.4,2.3c-0.3,0.8-0.9,1.4-1.7,1.6 l-12.2,3c-0.3,0.1-0.6,0.1-0.9,0.1c-0.8,0-1.5-0.2-2.2-0.6L52,69.1c-1.6-1-2.2-3-1.5-4.7l3.9-9.8c0.5-1.3,1.7-2.3,3.2-2.5l1.6-0.2 c1.3-0.2,2.7,0.4,3.5,1.4L71.9,64.9z M65.5,40.9L62,47.3c-0.6,1.1-1.7,1.9-3,2l-3.9,0.5c-0.2,0-0.3,0-0.5,0c-0.3,0-0.7,0-1-0.1 l-1.2-0.3c-1-0.3-1.8-1-2.1-1.9c-0.4-1-0.2-2,0.3-2.9l5-7.5c0.9-1.4,2.6-2,4.2-1.6l3.7,0.9c1,0.2,1.8,0.9,2.2,1.8 C66,39,66,40,65.5,40.9z M47.8,22.2l2.7-13.4c0.2-1,0.9-1.8,1.8-2.3c0.9-0.4,2-0.4,2.9,0.1l33.1,19.1c1,0.6,1.5,1.4,1.4,2.2 c-0.1,0.5-0.4,1.3-1.8,1.7l-16,4.6l-0.4,0.1c-0.7,0.1-1.6,0.3-2.6,0.3c-0.6,0-1.4-0.1-2.1-0.2l0,0l-8-1.9c-1.1-0.3-2.2-0.8-3.1-1.5 l-6.4-5C48.1,25.1,47.5,23.6,47.8,22.2z M51.8,31.3c1.6,1.3,2,3.6,0.9,5.3l-6.6,9.9c-0.6,1-1.5,1.8-2.5,2.4l-7.4,4.6 c-0.6,0.4-1.3,0.6-2.1,0.6c-0.5,0-1-0.1-1.5-0.3l-6-2.4c-1.2-0.5-2.1-1.5-2.4-2.8l-1.6-7c-0.4-1.8,0.4-3.6,2.1-4.4l18.8-9.6 c1.3-0.7,3-0.5,4.2,0.4L51.8,31.3z M11.3,26.5L44,7.6c0.8-0.5,1.8-0.4,2.6,0.1c0.8,0.6,1.1,1.5,1,2.4l-2.5,12.2 c-0.2,1.2-1,2.2-2.1,2.7L22.5,35.5c-0.6,0.3-1.2,0.4-1.8,0.4c-0.7,0-1.5-0.2-2.1-0.6l-7.4-4.7c-0.7-0.5-1.1-1.2-1.1-2.1 C10.1,27.7,10.6,26.9,11.3,26.5z M6.6,35.2c0-0.9,0.5-1.7,1.3-2.1c0.8-0.4,1.7-0.4,2.5,0.1l7.6,4.8c0.9,0.6,1.5,1.4,1.7,2.4l2.3,10 c0.2,0.9,0.3,1.8,0.2,2.7l-1.2,10.7c-0.1,1.1-0.6,2.1-1.5,2.8l-8.9,7.7c-0.5,0.4-1,0.6-1.6,0.6c-0.3,0-0.7-0.1-1-0.2 c-0.9-0.4-1.4-1.2-1.4-2.2V35.2z"/></g></svg></a>
+    <nav class="site-nav" aria-label="Crystaphase">
+      <a href="https://www.crystaphase.com/solutions/">Solutions</a>
+      <a href="https://www.crystaphase.com/science/">Science</a>
+      <a href="https://www.crystaphase.com/case-studies/">Case Studies</a>
+      <a href="https://www.crystaphase.com/company/">Company</a>
+      <a href="https://www.crystaphase.com/pathways/">Pathways</a>
+    </nav>
+    <a class="site-cta" href="https://www.crystaphase.com/analysis/">Start analysis</a>
+  </div>
+</header>
 <main>
+  <div class="night">
+    <svg class="bat-signal" viewBox="0 0 300 200" aria-hidden="true">
+      <defs>
+        <linearGradient id="bs-beam" gradientUnits="userSpaceOnUse" x1="-760" y1="820" x2="150" y2="100">
+          <stop offset="0" stop-color="#fff6cd" stop-opacity="0"/><stop offset=".65" stop-color="#fff6cd" stop-opacity=".07"/><stop offset="1" stop-color="#fff6cd" stop-opacity=".2"/>
+        </linearGradient>
+        <radialGradient id="bs-disc" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#fffbe8"/><stop offset=".72" stop-color="#fdf0b8"/><stop offset=".92" stop-color="#f6df8a" stop-opacity=".75"/><stop offset="1" stop-color="#f6df8a" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="bs-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="bs-cast"><feGaussianBlur stdDeviation=".9"/></filter>
+      </defs>
+      <polygon points="-790,800 -730,840 238,168 58,34" fill="url(#bs-beam)"/>
+      <g filter="url(#bs-soft)" fill="#40576d" opacity=".55">
+        <ellipse cx="60" cy="70" rx="80" ry="34"/><ellipse cx="240" cy="140" rx="90" ry="30"/><ellipse cx="170" cy="36" rx="70" ry="22"/>
+      </g>
+      <ellipse cx="150" cy="100" rx="128" ry="84" fill="#fdf0b8" opacity=".35" filter="url(#bs-soft)"/>
+      <ellipse cx="150" cy="100" rx="120" ry="78" fill="url(#bs-disc)"/>
+      <path d="M7.5,83.4L47,106.2c2.2,1.3,4.9,1.3,7,0l38.8-22.4c1-0.6,1.6-1.6,1.6-2.8c0-1.2-0.6-2.2-1.5-2.8l0,0L78.1,68 c-0.4-0.2-0.8-0.6-1.1-0.9L65.1,52.2c-1-1.2-1.1-2.9-0.4-4.3l4.8-8.8c0.5-1,1.4-1.7,2.5-2.1l20.1-5.8c1.3-0.4,2.1-1.4,2.3-2.7 c0.1-1.3-0.5-2.5-1.6-3.2L54,2.9c-1.1-0.6-2.3-0.9-3.5-0.9c-1.2,0-2.4,0.3-3.5,0.9L7.5,25.6C5.3,26.9,4,29.2,4,31.7v45.6 C4,79.8,5.3,82.1,7.5,83.4z M47.3,101.8c-0.4,0.3-0.9,0.4-1.3,0.4c-0.4,0-0.8-0.1-1.2-0.3l-33-19c-1-0.6-1.6-1.6-1.8-2.7 c-0.1-1.2,0.3-2.3,1.2-3l9.4-8.1c1-0.9,2.5-1.3,3.8-0.9l6.1,1.5c0.7,0.2,1.4,0.4,2,0.8l3.7,2.1c1.1,0.6,2.1,1.5,2.8,2.6l7.4,11.3 c0.3,0.5,0.6,1.1,0.6,1.8l1.2,11.6C48.5,100.5,48.1,101.3,47.3,101.8z M23.8,61.6l0.5-4.5c0.1-0.9,0.6-1.6,1.3-2.1 c0.8-0.5,1.7-0.5,2.5-0.2l2,0.8c1.7,0.7,2.7,2.5,2.4,4.4l-0.7,3.6c-0.2,0.9-0.7,1.6-1.4,2.1c-0.5,0.3-1.1,0.5-1.7,0.5 c-0.3,0-0.5,0-0.8-0.1l-1.2-0.3C24.9,65.4,23.6,63.6,23.8,61.6z M47.2,65.6c-0.4,0.9-1,1.6-1.9,2.1L41,69.9 c-0.6,0.3-1.2,0.4-1.8,0.4c-0.7,0-1.3-0.2-1.9-0.5l-1.1-0.6c-1.5-0.8-2.3-2.5-2-4.2l1.3-6.5c0.2-1.1,0.9-2,1.8-2.6l7.6-4.7 c0.9-0.6,2-0.7,3.1-0.5l0.4,0.1c1.1,0.3,2,1,2.5,2c0.5,1,0.6,2.2,0.1,3.2L47.2,65.6z M49.6,70.7l1.9,1.3c1.8,1.2,2.3,3.6,1.2,5.4 l-2.3,3.7c-0.4,0.7-1.2,1.1-2,1.1c0,0,0,0,0,0c-0.8,0-1.6-0.4-2-1.1l-3-4.5c-0.6-0.9-0.8-2.1-0.5-3.2c0.3-1.1,1-2,2-2.5l0.8-0.4 C46.9,69.8,48.4,69.9,49.6,70.7z M78.5,71.4L89,78.9c0.7,0.4,1.1,1.2,1.1,2.1c0,0.9-0.5,1.6-1.2,2l-34.1,19.7 c-0.4,0.2-0.8,0.3-1.2,0.3c-0.4,0-0.8-0.1-1.1-0.3c-0.7-0.4-1.2-1.1-1.3-1.9l-1.3-12.6c-0.1-0.9,0.1-1.7,0.6-2.5l6-9.6 c0.5-0.9,1.4-1.5,2.4-1.7L74,70.6C75.6,70.3,77.1,70.5,78.5,71.4z M71.9,64.9c0.5,0.6,0.7,1.5,0.4,2.3c-0.3,0.8-0.9,1.4-1.7,1.6 l-12.2,3c-0.3,0.1-0.6,0.1-0.9,0.1c-0.8,0-1.5-0.2-2.2-0.6L52,69.1c-1.6-1-2.2-3-1.5-4.7l3.9-9.8c0.5-1.3,1.7-2.3,3.2-2.5l1.6-0.2 c1.3-0.2,2.7,0.4,3.5,1.4L71.9,64.9z M65.5,40.9L62,47.3c-0.6,1.1-1.7,1.9-3,2l-3.9,0.5c-0.2,0-0.3,0-0.5,0c-0.3,0-0.7,0-1-0.1 l-1.2-0.3c-1-0.3-1.8-1-2.1-1.9c-0.4-1-0.2-2,0.3-2.9l5-7.5c0.9-1.4,2.6-2,4.2-1.6l3.7,0.9c1,0.2,1.8,0.9,2.2,1.8 C66,39,66,40,65.5,40.9z M47.8,22.2l2.7-13.4c0.2-1,0.9-1.8,1.8-2.3c0.9-0.4,2-0.4,2.9,0.1l33.1,19.1c1,0.6,1.5,1.4,1.4,2.2 c-0.1,0.5-0.4,1.3-1.8,1.7l-16,4.6l-0.4,0.1c-0.7,0.1-1.6,0.3-2.6,0.3c-0.6,0-1.4-0.1-2.1-0.2l0,0l-8-1.9c-1.1-0.3-2.2-0.8-3.1-1.5 l-6.4-5C48.1,25.1,47.5,23.6,47.8,22.2z M51.8,31.3c1.6,1.3,2,3.6,0.9,5.3l-6.6,9.9c-0.6,1-1.5,1.8-2.5,2.4l-7.4,4.6 c-0.6,0.4-1.3,0.6-2.1,0.6c-0.5,0-1-0.1-1.5-0.3l-6-2.4c-1.2-0.5-2.1-1.5-2.4-2.8l-1.6-7c-0.4-1.8,0.4-3.6,2.1-4.4l18.8-9.6 c1.3-0.7,3-0.5,4.2,0.4L51.8,31.3z M11.3,26.5L44,7.6c0.8-0.5,1.8-0.4,2.6,0.1c0.8,0.6,1.1,1.5,1,2.4l-2.5,12.2 c-0.2,1.2-1,2.2-2.1,2.7L22.5,35.5c-0.6,0.3-1.2,0.4-1.8,0.4c-0.7,0-1.5-0.2-2.1-0.6l-7.4-4.7c-0.7-0.5-1.1-1.2-1.1-2.1 C10.1,27.7,10.6,26.9,11.3,26.5z M6.6,35.2c0-0.9,0.5-1.7,1.3-2.1c0.8-0.4,1.7-0.4,2.5,0.1l7.6,4.8c0.9,0.6,1.5,1.4,1.7,2.4l2.3,10 c0.2,0.9,0.3,1.8,0.2,2.7l-1.2,10.7c-0.1,1.1-0.6,2.1-1.5,2.8l-8.9,7.7c-0.5,0.4-1,0.6-1.6,0.6c-0.3,0-0.7-0.1-1-0.2 c-0.9-0.4-1.4-1.2-1.4-2.2V35.2z" fill="#0c1824" opacity=".92" filter="url(#bs-cast)" transform="translate(150 101) scale(1.1 1.02) translate(-49.5 -54)"/>
+    </svg>
+    <svg class="skyline" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><path fill="#172d42" d="M0 120V63H32V120ZM34 120V67H74V120ZM75 120V90H114V120ZM114 120V52H161V120ZM163 120V83H199V120ZM199 120V90H254V120ZM256 120V83H294V120ZM295 120V28H336V120ZM338 120V66H381V120ZM383 120V88H412V120ZM413 120V52H468V120ZM471 120V91H505V120ZM505 120V54H554V120ZM554 120V82H582V120ZM585 120V61H641V120ZM643 120V68H702V120ZM702 120V62H750V120ZM752 120V82H782V120ZM785 120V66H827V120ZM827 120V68H883V120ZM883 120V72H922V120ZM924 120V75H971V120ZM972 120V34H1009V120ZM1010 120V82H1055V120ZM1055 120V72H1089V120ZM1089 120V67H1136V120ZM1138 120V69H1187V120ZM1188 120V66H1234V120ZM1237 120V59H1286V120ZM1289 120V78H1349V120ZM1351 120V50H1377V120ZM1379 120V61H1421V120ZM1421 120V83H1468V120Z"/><path fill="#08121c" d="M0 120V61H54V120ZM57 120V102H96V120ZM99 120V69H147V120ZM148 120V16H197V120ZM200 120V8H243V120ZM243 120V78H279V120ZM281 120V82H346V120ZM346 120V86H395V120ZM396 120V72H454V120ZM454 120V85H499V120ZM502 120V95H549V120ZM549 120V58H610V120ZM610 120V24H667V120ZM670 120V57H700V120ZM703 120V71H742V120ZM743 120V84H778V120ZM779 120V101H828V120ZM829 120V95H864V120ZM865 120V62H934V120ZM935 120V80H1003V120ZM1004 120V66H1059V120ZM1062 120V85H1096V120ZM1099 120V12H1134V120ZM1134 120V59H1182V120ZM1184 120V20H1226V120ZM1227 120V60H1257V120ZM1258 120V81H1288V120ZM1291 120V66H1323V120ZM1324 120V62H1390V120ZM1390 120V58H1431V120ZM1434 120V58H1485V120Z"/><g fill="#f5d97a" opacity=".55"><rect x="46" y="89" width="3" height="4"/><rect x="68" y="110" width="3" height="4"/><rect x="131" y="107" width="3" height="4"/><rect x="152" y="24" width="3" height="4"/><rect x="173" y="24" width="3" height="4"/><rect x="166" y="34" width="3" height="4"/><rect x="152" y="54" width="3" height="4"/><rect x="180" y="114" width="3" height="4"/><rect x="232" y="56" width="3" height="4"/><rect x="232" y="86" width="3" height="4"/><rect x="211" y="96" width="3" height="4"/><rect x="225" y="96" width="3" height="4"/><rect x="285" y="90" width="3" height="4"/><rect x="341" y="100" width="3" height="4"/><rect x="292" y="110" width="3" height="4"/><rect x="313" y="110" width="3" height="4"/><rect x="320" y="110" width="3" height="4"/><rect x="421" y="90" width="3" height="4"/><rect x="428" y="100" width="3" height="4"/><rect x="553" y="86" width="3" height="4"/><rect x="560" y="86" width="3" height="4"/><rect x="560" y="96" width="3" height="4"/><rect x="567" y="96" width="3" height="4"/><rect x="560" y="106" width="3" height="4"/><rect x="614" y="32" width="3" height="4"/><rect x="621" y="32" width="3" height="4"/><rect x="656" y="42" width="3" height="4"/><rect x="628" y="72" width="3" height="4"/><rect x="614" y="92" width="3" height="4"/><rect x="649" y="112" width="3" height="4"/><rect x="688" y="115" width="3" height="4"/><rect x="707" y="79" width="3" height="4"/><rect x="707" y="109" width="3" height="4"/><rect x="768" y="102" width="3" height="4"/><rect x="818" y="109" width="3" height="4"/><rect x="840" y="113" width="3" height="4"/><rect x="854" y="113" width="3" height="4"/><rect x="897" y="70" width="3" height="4"/><rect x="883" y="100" width="3" height="4"/><rect x="890" y="100" width="3" height="4"/><rect x="946" y="88" width="3" height="4"/><rect x="946" y="98" width="3" height="4"/><rect x="974" y="98" width="3" height="4"/><rect x="995" y="98" width="3" height="4"/><rect x="939" y="108" width="3" height="4"/><rect x="1029" y="114" width="3" height="4"/><rect x="1066" y="113" width="3" height="4"/><rect x="1138" y="97" width="3" height="4"/><rect x="1173" y="97" width="3" height="4"/><rect x="1209" y="28" width="3" height="4"/><rect x="1216" y="78" width="3" height="4"/><rect x="1202" y="108" width="3" height="4"/><rect x="1252" y="98" width="3" height="4"/><rect x="1295" y="114" width="3" height="4"/><rect x="1377" y="90" width="3" height="4"/><rect x="1370" y="100" width="3" height="4"/><rect x="1356" y="110" width="3" height="4"/><rect x="1415" y="66" width="3" height="4"/><rect x="1438" y="66" width="3" height="4"/><rect x="1480" y="66" width="3" height="4"/></g></svg>
   <section class="hero">
     <div>
       <p class="eyebrow">Crystaphase 2027 Calendar Mousepad</p>
       <h1>Get your 2027 mousepad.</h1>
       <p class="lead">Every year we make a calendar mousepad for the people we work with. Tell us where to send yours and how many your team would like (up to 10). We ship weekly from Houston, with tracking, to anywhere in the world.</p>
     </div>
-    <img id="art" alt="The 2027 Crystaphase calendar mousepad: a red Crystalert hotline phone beside the headline 'Optimization is just a call away.'" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 450'><rect width='380' height='450' fill='%23f1f1ef'/><rect x='24' y='24' width='332' height='402' fill='none' stroke='%23c8102e' stroke-width='3'/><text x='190' y='225' font-family='Arial' font-size='20' text-anchor='middle' fill='%23555'>2027 mousepad art</text></svg>">
+    <div class="pad">
+      <img id="art" alt="The 2027 Crystaphase calendar mousepad: a red Crystalert hotline phone beside the headline 'Optimization is just a call away.'" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 450'><rect width='380' height='450' fill='%23f1f1ef'/><rect x='24' y='24' width='332' height='402' fill='none' stroke='%23c8102e' stroke-width='3'/><text x='190' y='225' font-family='Arial' font-size='20' text-anchor='middle' fill='%23555'>2027 mousepad art</text></svg>">
+      <svg class="mouse" viewBox="0 0 100 160" aria-hidden="true">
+        <defs>
+          <linearGradient id="ms-body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a5157"/><stop offset=".55" stop-color="#23282d"/><stop offset="1" stop-color="#101315"/></linearGradient>
+          <radialGradient id="ms-gloss" cx=".35" cy=".25" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        </defs>
+        <path d="M50 4C80 4 95 30 95 72C95 126 77 156 50 156C23 156 5 126 5 72C5 30 20 4 50 4Z" fill="url(#ms-body)"/>
+        <path d="M50 4C80 4 95 30 95 72C95 126 77 156 50 156C23 156 5 126 5 72C5 30 20 4 50 4Z" fill="url(#ms-gloss)"/>
+        <path d="M50 6V60M8 62Q50 72 92 62" stroke="#0a0c0e" stroke-width="1.6" fill="none" opacity=".8"/>
+        <rect x="45.5" y="20" width="9" height="24" rx="4.5" fill="#4dc0a1"/>
+        <rect x="47.5" y="24" width="5" height="6" rx="2.5" fill="#bff0e2" opacity=".7"/>
+      </svg>
+    </div>
   </section>
+  </div>
 
+  <div class="wrap">
   <form id="mp-form" novalidate>
     <div id="banner" class="banner" role="alert"></div>
 
@@ -153,7 +251,19 @@
     <p>We ship every Friday. You'll get a tracking email when yours goes out.</p>
     <p class="note">Questions? <a href="mailto:info@crystaphase.com">info@crystaphase.com</a> · 281.874.2110</p>
   </section>
+  </div>
 </main>
+<footer class="site-footer">
+  <div class="site-bar">
+    <nav aria-label="Footer">
+      <a href="https://www.crystaphase.com/">Home</a>
+      <a href="https://www.crystaphase.com/careers/">Careers</a>
+      <a href="https://www.crystaphase.com/company/">Company</a>
+      <a href="https://www.crystaphase.com/legal/">Legal</a>
+    </nav>
+    <span>Crystaphase &copy; <span id="year">2026</span></span>
+  </div>
+</footer>
 
 <script>
 (function(){
@@ -164,6 +274,7 @@
   var MAX_QTY = 10;
   // ================================
 
+  var yr = document.getElementById("year"); if (yr) yr.textContent = new Date().getFullYear();
   if (ART_URL) { var art = document.getElementById("art"); art.src = ART_URL; art.className = "art"; }
 
   // ---- Option lists ----
