@@ -64,29 +64,31 @@
   .site-footer a{color:#797979;text-decoration:none}
   .site-footer a:hover{color:#46af91}
 
-  /* 2027 theme: "We feed on foulants." Deep teal from the pad art, foam-cell mesh,
-     drifting foulant specks, and a flytrap jaw (rim + cilia) the form sits in. */
-  .band{position:relative;overflow:hidden;padding:64px 16px 150px;
-    background:radial-gradient(46% 58% at 74% 42%,rgba(175,245,222,.34),rgba(175,245,222,.08) 55%,transparent 72%),
-      linear-gradient(170deg,#007d6c 0%,#055446 55%,#033a31 100%)}
-  .foam{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-  .jaw{position:absolute;left:0;bottom:0;width:100%;height:96px;pointer-events:none}
-  .specks{position:absolute;inset:0;pointer-events:none}
-  .specks i{position:absolute;background:#d8c7a2;opacity:.3;max-width:5px;max-height:5px;animation:drift 20s ease-in-out infinite alternate}
-  @keyframes drift{from{transform:translate(0,0) rotate(0)}to{transform:translate(90px,-26px) rotate(160deg)}}
-  @media (prefers-reduced-motion:reduce){.specks i{animation:none}}
+  /* 2027 theme: "We feed on foulants." A light hero like crystaphase.com so the teal pad
+     pops, the site's faint cell-line mesh, and a foulant fly that wanders the page. */
+  .band{position:relative;overflow:hidden;padding:56px 16px 72px;
+    background:radial-gradient(50% 60% at 74% 45%,rgba(70,175,145,.10),transparent 70%),linear-gradient(180deg,#fff 0%,#f6f6f4 100%)}
+  .foam{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
   .band .hero{position:relative;z-index:1;max-width:960px;margin:0 auto;grid-template-columns:1fr 1.1fr;gap:48px}
-  .band .eyebrow{color:#c8e36f}
-  .band h1{color:#fff;font-size:2.5rem}
-  .band .lead{color:rgba(255,255,255,.86)}
-  .wrap{position:relative;z-index:1;max-width:760px;margin:-34px auto 0;padding:0 16px 64px}
+  .band .eyebrow{color:#2f8f74}
+  .band h1{color:#2e8c72;font-size:2.9rem;font-weight:300;letter-spacing:-.01em;line-height:1.08}
+  .band .lead{color:#5d5d5d}
+  .fly{position:fixed;left:0;top:0;width:38px;height:38px;margin:-19px 0 0 -19px;z-index:50;pointer-events:none;will-change:transform}
+  .fly svg{position:relative;display:block;width:100%;height:100%;overflow:visible}
+  .fly-shadow{position:absolute;left:30%;top:52%;width:50%;height:40%;border-radius:50%;background:rgba(20,30,25,.28);filter:blur(3px)}
+  .fly .w{fill:rgba(220,232,238,.38);stroke:rgba(60,70,75,.45);stroke-width:.5}
+  .fly.flying .fly-wings{animation:flap .045s linear infinite alternate;transform-origin:0 -1px}
+  .fly.flying .fly-shadow{transform:translate(8px,10px) scale(.8);opacity:.6}
+  @keyframes flap{from{transform:scaleX(1)}to{transform:scaleX(.45)}}
+  @media (prefers-reduced-motion:reduce){.fly{display:none}}
+  .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 16px 64px}
 
   /* The mousepad on a desk: tilt, rubber edge, shadow, and a mouse */
   .desk{position:relative;padding-right:17%;transform:perspective(1600px) rotateX(16deg) rotateZ(-4deg);transform-origin:50% 60%}
-  .pad{filter:drop-shadow(0 4px 0 #031f1a) drop-shadow(0 26px 24px rgba(0,20,16,.6))}
+  .pad{filter:drop-shadow(0 4px 0 #1d2b27) drop-shadow(0 22px 26px rgba(20,45,38,.32)) drop-shadow(0 6px 8px rgba(20,45,38,.18))}
   .pad img{display:block}
   .mouse{position:absolute;right:0;top:54%;width:21%;transform:rotate(-7deg);
-    filter:drop-shadow(0 2px 1.5px rgba(0,0,0,.75)) drop-shadow(-8px 16px 14px rgba(0,0,0,.5))}
+    filter:drop-shadow(0 2px 1.5px rgba(0,0,0,.55)) drop-shadow(-8px 16px 16px rgba(20,40,35,.3))}
   .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 6px}
   h1{font-size:2rem;line-height:1.15;margin:0 0 12px}
   .lead{color:var(--muted);margin:0}
@@ -135,10 +137,10 @@
     .site-cta{margin-left:auto;padding:10px 14px;font-size:.72rem}
     .site-header .site-bar{height:64px}
     .site-logo svg{height:42px}
-    .band{padding-top:36px;padding-bottom:130px}
-    .band h1{font-size:1.9rem}
+    .band{padding-top:32px;padding-bottom:44px}
+    .band h1{font-size:2.2rem}
     .band .hero{grid-template-columns:1fr;gap:32px}
-    .jaw{height:80px}
+    .fly{width:28px;height:28px;margin:-14px 0 0 -14px}
     .desk{transform:perspective(1200px) rotateX(12deg) rotateZ(-3deg)}
     .facts{grid-template-columns:1fr}
     .details{padding:20px}
@@ -165,9 +167,7 @@
 </header>
 <main>
   <div class="band">
-    <svg class="foam" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="fm-fade" cx=".78" cy=".35" r=".85"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".35" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff"/></radialGradient><mask id="fm-mask"><rect width="1440" height="720" fill="url(#fm-fade)"/></mask></defs><path d="M-104 614L0 688M-93 223L0 234M-84 431L0 406M-80 570L0 565M-78 -96L0 0M-74 484L0 497M-68 306L0 265M-60 350L0 372M-13 743L0 720M0 0L0 112M0 0L166 0M0 112L-80 127M0 234L0 112M0 234L93 223M0 265L0 234M0 265L0 372M0 372L0 406M0 406L0 497M0 497L0 565M0 565L0 688M0 565L80 570M0 688L104 614M0 720L0 688M0 720L137 720M60 350L0 372M68 306L0 265M68 306L60 350M68 306L113 285M74 484L0 497M74 484L105 519M80 127L0 112M80 127L111 187M80 570L105 519M84 431L0 406M84 431L74 484M93 223L111 187M98 375L60 350M98 375L100 418M98 375L135 344M100 418L84 431M100 418L139 429M104 614L80 570M104 614L142 630M105 519L157 512M111 187L176 184M113 285L117 275M113 285L135 344M117 275L93 223M135 344L183 355M139 429L166 483M142 630L186 547M147 637L137 720M147 637L142 630M147 803L137 720M163 58L80 127M163 58L166 0M163 58L204 122M166 0L163 -58M166 0L328 0M166 483L157 512M176 184L204 122M176 184L204 231M183 355L213 326M184 391L139 429M184 391L183 355M186 547L157 512M188 266L117 275M188 266L204 231M204 122L306 136M204 231L288 222M213 326L188 266M239 553L186 547M240 444L166 483M241 441L184 391M241 441L240 444M244 646L147 637M244 646L259 720M244 794L259 720M251 331L213 326M251 331L313 264M259 720L137 720M264 611L239 553M264 611L244 646M274 506L239 553M274 506L240 444M285 391L251 331M285 391L285 394M285 391L361 336M285 394L241 441M288 222L306 136M313 264L288 222M321 506L274 506M321 506L363 574M328 -117L328 0M328 0L453 0M328 117L306 136M328 117L328 0M328 117L409 149M337 430L285 394M337 430L395 379M348 470L321 506M348 470L337 430M348 470L410 470M350 609L264 611M350 609L367 645M350 720L259 720M358 282L313 264M358 282L361 336M358 282L433 247M361 336L395 379M363 574L350 609M363 574L415 552M367 645L350 720M367 645L471 644M367 795L350 720M395 379L415 386M409 149L474 95M410 470L415 386M410 470L423 480M415 386L470 370M415 552L477 580M423 480L415 552M423 480L462 475M433 247L438 232M433 247L484 315M438 232L409 149M438 232L548 191M462 475L503 506M470 370L494 401M471 644L489 604M471 644L490 720M471 796L490 720M474 95L478 72M474 95L551 160M478 -72L453 0M478 72L453 0M478 72L593 53M484 315L470 370M484 315L598 296M489 604L477 580M489 604L549 600M490 720L350 720M494 401L462 475M503 506L477 580M534 414L494 401M534 414L578 400M538 497L503 506M538 497L534 414M538 497L570 510M549 600L582 536M551 160L548 191M570 510L582 536M578 400L611 332M593 -53L606 0M593 53L606 0M599 720L490 720M599 720L601 651M601 651L549 600M601 651L654 607M601 789L599 720M606 0L453 0M608 266L548 191M608 266L598 296M609 108L551 160M609 108L593 53M609 108L674 132M611 332L598 296M614 453L570 510M614 453L578 400M614 453L672 460M639 549L582 536M654 607L639 549M672 460L684 502M674 132L728 91M682 225L608 266M682 225L674 132M684 502L639 549M717 387L611 332M717 387L672 460M717 387L745 379M718 621L654 607M718 621L750 720M718 621L766 544M723 0L606 0M728 -91L723 0M728 91L723 0M745 379L812 462M750 720L599 720M750 720L718 819M750 720L845 720M757 253L682 225M766 544L684 502M771 112L728 91M771 112L828 91M779 316L745 379M779 316L757 253M779 540L766 544M797 203L757 253M797 203L771 112M797 203L853 194M812 462L779 540M841 0L723 0M841 0L849 37M845 720L973 720M849 -37L841 0M849 37L828 91M853 194L866 126M858 600L779 540M858 600L845 720M858 600L916 567M858 840L845 720M866 126L828 91M876 450L812 462M876 450L911 371M876 450L918 494M892 323L779 316M892 323L911 371M896 217L853 194M896 217L950 152M914 113L866 126M914 113L921 74M916 567L970 591M918 494L916 567M918 494L1013 468M920 274L892 323M920 274L896 217M920 274L988 263M921 74L849 37M950 152L914 113M950 152L964 152M953 0L841 0M953 0L1061 0M954 -48L953 0M954 48L921 74M954 48L953 0M964 152L1000 109M970 591L1037 505M973 720L992 627M973 720L1114 720M988 263L1011 204M991 72L954 48M991 72L1000 109M991 72L1057 31M992 627L970 591M992 627L1074 611M992 813L973 720M1011 204L964 152M1011 204L1018 201M1013 468L1037 505M1018 201L1053 130M1023 399L911 371M1023 399L1013 468M1037 505L1078 524M1046 381L1023 399M1046 381L1050 315M1046 381L1146 413M1049 121L1000 109M1049 121L1053 130M1049 121L1077 76M1050 315L988 263M1057 -31L1061 0M1057 31L1061 0M1061 0L1151 0M1074 611L1078 524M1074 611L1110 640M1077 76L1057 31M1077 76L1146 92M1083 209L1018 201M1083 209L1093 154M1093 154L1053 130M1093 154L1140 136M1107 275L1050 315M1107 275L1108 238M1107 275L1176 306M1108 238L1083 209M1108 238L1176 186M1110 640L1114 720M1110 640L1183 592M1110 800L1114 720M1114 720L1238 720M1140 136L1176 186M1146 92L1140 136M1146 92L1155 83M1146 413L1164 474M1146 413L1186 358M1147 503L1078 524M1147 503L1183 592M1151 0L1245 0M1155 -83L1151 0M1155 83L1151 0M1155 83L1220 88M1164 474L1147 503M1164 474L1255 477M1176 306L1186 358M1176 306L1215 266M1186 358L1288 376M1191 190L1176 186M1191 190L1244 158M1215 266L1191 190M1215 266L1263 268M1220 -88L1245 0M1220 88L1245 0M1220 88L1251 119M1226 608L1183 592M1226 608L1238 720M1226 832L1238 720M1244 158L1251 119M1244 158L1297 204M1251 119L1301 97M1255 477L1276 503M1255 477L1292 383M1263 268L1297 204M1263 268L1300 314M1266 582L1226 608M1266 582L1331 606M1276 503L1266 582M1276 503L1345 500M1287 0L1245 0M1288 376L1292 383M1292 383L1336 396M1297 204L1334 199M1300 314L1288 376M1300 314L1378 277M1301 -97L1287 0M1301 97L1287 0M1315 720L1238 720M1319 101L1301 97M1319 101L1356 167M1334 199L1356 167M1336 396L1440 310M1345 500L1372 555M1346 639L1315 720M1346 639L1331 606M1346 639L1440 643M1346 801L1315 720M1356 0L1287 0M1359 422L1336 396M1359 422L1440 414M1362 478L1345 500M1362 478L1359 422M1362 478L1440 485M1366 -69L1356 0M1366 69L1319 101M1366 69L1356 0M1372 555L1331 606M1372 555L1440 561M1378 277L1334 199M1378 277L1440 295M1388 160L1356 167M1388 160L1396 82M1388 160L1440 174M1396 82L1366 69M1440 0L1356 0M1440 0L1499 -58M1440 72L1396 82M1440 72L1440 0M1440 72L1440 174M1440 295L1440 174M1440 295L1440 310M1440 295L1502 277M1440 310L1440 414M1440 485L1440 414M1440 485L1440 561M1440 643L1440 561M1440 720L1315 720M1440 720L1440 643M1484 82L1440 72M1492 160L1440 174M1493 794L1440 720M1508 555L1440 561M1518 478L1440 485M1521 422L1440 414M1534 639L1440 643M1544 396L1440 310" fill="none" stroke="#fff" stroke-opacity=".11" stroke-width="1.2" mask="url(#fm-mask)" vector-effect="non-scaling-stroke"/></svg>
-    <div class="specks" aria-hidden="true"><i style="left:27%;top:35%;width:3.6px;height:3.1px;border-radius:62% 56% 35% 45%;animation-duration:25s;animation-delay:-2s"></i><i style="left:31%;top:52%;width:3.2px;height:2.7px;border-radius:47% 40% 57% 65%;animation-duration:23s;animation-delay:-3s"></i><i style="left:15%;top:16%;width:5.3px;height:4.8px;border-radius:64% 53% 37% 59%;animation-duration:23s;animation-delay:-18s"></i><i style="left:51%;top:23%;width:4.0px;height:3.7px;border-radius:60% 48% 63% 37%;animation-duration:25s;animation-delay:-8s"></i><i style="left:20%;top:11%;width:6.2px;height:6.0px;border-radius:35% 63% 48% 36%;animation-duration:24s;animation-delay:-3s"></i><i style="left:15%;top:61%;width:6.8px;height:6.3px;border-radius:65% 54% 35% 38%;animation-duration:16s;animation-delay:-17s"></i><i style="left:20%;top:72%;width:3.6px;height:3.1px;border-radius:64% 35% 51% 37%;animation-duration:20s;animation-delay:-4s"></i><i style="left:6%;top:22%;width:6.4px;height:6.3px;border-radius:57% 53% 39% 40%;animation-duration:23s;animation-delay:-1s"></i><i style="left:16%;top:57%;width:6.8px;height:6.8px;border-radius:58% 43% 58% 53%;animation-duration:15s;animation-delay:-14s"></i><i style="left:52%;top:25%;width:5.8px;height:5.2px;border-radius:36% 58% 46% 62%;animation-duration:21s;animation-delay:-15s"></i><i style="left:7%;top:33%;width:6.9px;height:5.7px;border-radius:53% 46% 49% 41%;animation-duration:26s;animation-delay:-11s"></i><i style="left:3%;top:66%;width:4.5px;height:3.7px;border-radius:48% 38% 41% 42%;animation-duration:18s;animation-delay:-2s"></i><i style="left:35%;top:15%;width:6.5px;height:6.2px;border-radius:35% 47% 59% 52%;animation-duration:20s;animation-delay:-14s"></i><i style="left:15%;top:61%;width:4.9px;height:4.0px;border-radius:42% 38% 65% 59%;animation-duration:18s;animation-delay:-17s"></i></div>
-    <svg class="jaw" viewBox="0 0 1440 96" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="jw-cilia" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#8fbf3a"/><stop offset="1" stop-color="#e3f09a"/></linearGradient></defs><path d="M4.6 78.3L-10.6 43.1L7.4 76.9ZM26.3 76.8L13.0 51.7L29.1 75.1ZM47.0 75.1L34.1 46.6L49.9 73.7ZM67.7 73.5L59.0 46.8L70.7 72.3ZM86.1 72.1L78.7 47.6L89.1 71.0ZM105.1 70.7L97.6 46.1L108.1 69.6ZM125.6 69.3L112.3 31.2L128.5 68.1ZM147.5 67.6L141.7 44.0L150.5 66.7ZM167.0 66.3L158.2 38.1L170.0 65.2ZM184.3 65.1L173.6 28.3L187.4 64.1ZM203.0 63.9L195.1 38.9L206.0 62.8ZM220.1 62.6L211.1 23.1L223.2 61.8ZM240.6 61.5L228.8 27.8L243.6 60.3ZM260.5 60.0L255.4 30.5L263.6 59.2ZM276.8 59.2L261.2 16.6L279.7 58.0ZM297.2 57.8L290.2 26.9L300.2 56.9ZM315.1 56.8L308.0 26.8L318.1 55.9ZM335.8 55.6L328.4 24.7L338.9 54.7ZM356.2 54.5L350.3 27.2L359.3 53.6ZM374.9 53.6L366.3 19.2L377.9 52.7ZM395.2 52.6L386.8 18.8L398.3 51.7ZM412.6 51.7L408.2 26.7L415.7 50.9ZM428.3 50.9L424.4 21.5L431.5 50.3ZM448.2 50.0L444.0 19.7L451.3 49.4ZM466.7 49.2L464.7 12.3L469.9 48.8ZM483.3 48.6L478.7 7.8L486.4 48.1ZM504.6 48.0L497.1 9.6L507.7 47.3ZM519.9 47.4L514.5 6.2L523.1 46.9ZM539.2 46.7L537.9 20.6L542.4 46.4ZM557.1 46.4L552.0 12.6L560.3 45.8ZM578.4 45.7L577.7 3.1L581.6 45.5ZM597.7 45.4L595.4 16.4L600.9 45.0ZM618.6 44.9L617.4 13.7L621.8 44.7ZM639.7 44.4L642.4 12.9L642.9 44.6ZM656.0 44.4L654.3 1.7L659.2 44.2ZM672.0 44.1L674.4 10.0L675.2 44.2ZM687.7 44.0L690.8 7.0L690.9 44.1ZM702.9 44.1L703.0 9.3L706.1 44.0ZM721.2 44.0L722.4 1.7L724.4 44.0ZM738.3 43.9L741.9 15.6L741.5 44.1ZM754.4 43.9L760.4 4.6L757.6 44.3ZM774.2 44.3L774.6 0.4L777.4 44.2ZM793.5 44.5L794.2 7.1L796.7 44.4ZM811.5 44.7L813.0 14.0L814.7 44.7ZM829.3 44.8L834.7 19.4L832.5 45.2ZM845.5 45.1L851.5 9.6L848.7 45.5ZM860.6 45.4L869.8 1.6L863.8 45.9ZM879.7 45.8L887.3 11.1L882.8 46.4ZM898.9 46.3L906.1 18.3L902.0 46.9ZM915.3 46.9L922.0 11.2L918.5 47.3ZM935.7 47.5L942.7 16.2L938.8 48.0ZM952.1 48.2L957.6 9.2L955.3 48.5ZM969.6 48.6L978.6 14.3L972.7 49.3ZM991.0 49.5L1000.6 5.4L994.1 50.1ZM1006.4 50.2L1015.7 14.2L1009.6 50.8ZM1026.6 51.0L1034.6 27.2L1029.7 51.8ZM1042.5 51.7L1056.7 11.8L1045.6 52.6ZM1061.3 52.7L1071.6 20.4L1064.4 53.5ZM1077.3 53.4L1090.3 17.2L1080.3 54.4ZM1098.8 54.6L1111.8 17.3L1101.9 55.5ZM1120.5 55.9L1129.9 24.8L1123.6 56.7ZM1142.5 57.1L1150.6 33.0L1145.6 58.0ZM1162.7 58.2L1179.7 16.8L1165.7 59.3ZM1179.0 59.3L1191.4 19.7L1182.1 60.2ZM1197.8 60.3L1214.2 26.5L1200.7 61.6ZM1214.3 61.5L1225.2 31.8L1217.3 62.5ZM1231.3 62.6L1241.8 37.0L1234.4 63.7ZM1248.3 63.6L1261.8 37.1L1251.2 64.9ZM1264.0 64.9L1275.3 32.6L1267.0 65.8ZM1279.4 65.8L1298.7 27.7L1282.3 67.1ZM1301.0 67.3L1313.7 44.1L1303.8 68.6ZM1318.0 68.5L1336.3 31.4L1320.9 69.8ZM1336.0 69.9L1351.4 35.5L1339.0 71.1ZM1354.8 71.1L1375.0 33.7L1357.7 72.5ZM1375.1 72.7L1393.3 31.3L1378.0 73.9ZM1395.5 74.1L1417.2 34.5L1398.4 75.5ZM1412.8 75.5L1429.2 41.1L1415.8 76.7ZM1433.1 77.0L1450.4 40.5L1436.1 78.2Z" fill="url(#jw-cilia)" opacity=".85"/><polygon points="0,96 0,78.0 24,76.2 48,74.4 72,72.7 96,70.9 120,69.2 144,67.5 168,65.8 192,64.2 216,62.6 240,61.0 264,59.5 288,58.0 312,56.6 336,55.2 360,54.0 384,52.7 408,51.6 432,50.5 456,49.5 480,48.6 504,47.7 528,46.9 552,46.3 576,45.7 600,45.2 624,44.7 648,44.4 672,44.2 696,44.0 720,44.0 744,44.0 768,44.2 792,44.4 816,44.7 840,45.2 864,45.7 888,46.3 912,46.9 936,47.7 960,48.6 984,49.5 1008,50.5 1032,51.6 1056,52.7 1080,54.0 1104,55.2 1128,56.6 1152,58.0 1176,59.5 1200,61.0 1224,62.6 1248,64.2 1272,65.8 1296,67.5 1320,69.2 1344,70.9 1368,72.7 1392,74.4 1416,76.2 1440,78.0 1440,96" fill="#f6f6f4"/><polyline points="0,78.0 24,76.2 48,74.4 72,72.7 96,70.9 120,69.2 144,67.5 168,65.8 192,64.2 216,62.6 240,61.0 264,59.5 288,58.0 312,56.6 336,55.2 360,54.0 384,52.7 408,51.6 432,50.5 456,49.5 480,48.6 504,47.7 528,46.9 552,46.3 576,45.7 600,45.2 624,44.7 648,44.4 672,44.2 696,44.0 720,44.0 744,44.0 768,44.2 792,44.4 816,44.7 840,45.2 864,45.7 888,46.3 912,46.9 936,47.7 960,48.6 984,49.5 1008,50.5 1032,51.6 1056,52.7 1080,54.0 1104,55.2 1128,56.6 1152,58.0 1176,59.5 1200,61.0 1224,62.6 1248,64.2 1272,65.8 1296,67.5 1320,69.2 1344,70.9 1368,72.7 1392,74.4 1416,76.2 1440,78.0" fill="none" stroke="#7fb23a" stroke-width="3"/></svg>
+    <svg class="foam" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="fm-fade" cx=".78" cy=".35" r=".85"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".35" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff"/></radialGradient><mask id="fm-mask"><rect width="1440" height="720" fill="url(#fm-fade)"/></mask></defs><path d="M-104 614L0 688M-93 223L0 234M-84 431L0 406M-80 570L0 565M-78 -96L0 0M-74 484L0 497M-68 306L0 265M-60 350L0 372M-13 743L0 720M0 0L0 112M0 0L166 0M0 112L-80 127M0 234L0 112M0 234L93 223M0 265L0 234M0 265L0 372M0 372L0 406M0 406L0 497M0 497L0 565M0 565L0 688M0 565L80 570M0 688L104 614M0 720L0 688M0 720L137 720M60 350L0 372M68 306L0 265M68 306L60 350M68 306L113 285M74 484L0 497M74 484L105 519M80 127L0 112M80 127L111 187M80 570L105 519M84 431L0 406M84 431L74 484M93 223L111 187M98 375L60 350M98 375L100 418M98 375L135 344M100 418L84 431M100 418L139 429M104 614L80 570M104 614L142 630M105 519L157 512M111 187L176 184M113 285L117 275M113 285L135 344M117 275L93 223M135 344L183 355M139 429L166 483M142 630L186 547M147 637L137 720M147 637L142 630M147 803L137 720M163 58L80 127M163 58L166 0M163 58L204 122M166 0L163 -58M166 0L328 0M166 483L157 512M176 184L204 122M176 184L204 231M183 355L213 326M184 391L139 429M184 391L183 355M186 547L157 512M188 266L117 275M188 266L204 231M204 122L306 136M204 231L288 222M213 326L188 266M239 553L186 547M240 444L166 483M241 441L184 391M241 441L240 444M244 646L147 637M244 646L259 720M244 794L259 720M251 331L213 326M251 331L313 264M259 720L137 720M264 611L239 553M264 611L244 646M274 506L239 553M274 506L240 444M285 391L251 331M285 391L285 394M285 391L361 336M285 394L241 441M288 222L306 136M313 264L288 222M321 506L274 506M321 506L363 574M328 -117L328 0M328 0L453 0M328 117L306 136M328 117L328 0M328 117L409 149M337 430L285 394M337 430L395 379M348 470L321 506M348 470L337 430M348 470L410 470M350 609L264 611M350 609L367 645M350 720L259 720M358 282L313 264M358 282L361 336M358 282L433 247M361 336L395 379M363 574L350 609M363 574L415 552M367 645L350 720M367 645L471 644M367 795L350 720M395 379L415 386M409 149L474 95M410 470L415 386M410 470L423 480M415 386L470 370M415 552L477 580M423 480L415 552M423 480L462 475M433 247L438 232M433 247L484 315M438 232L409 149M438 232L548 191M462 475L503 506M470 370L494 401M471 644L489 604M471 644L490 720M471 796L490 720M474 95L478 72M474 95L551 160M478 -72L453 0M478 72L453 0M478 72L593 53M484 315L470 370M484 315L598 296M489 604L477 580M489 604L549 600M490 720L350 720M494 401L462 475M503 506L477 580M534 414L494 401M534 414L578 400M538 497L503 506M538 497L534 414M538 497L570 510M549 600L582 536M551 160L548 191M570 510L582 536M578 400L611 332M593 -53L606 0M593 53L606 0M599 720L490 720M599 720L601 651M601 651L549 600M601 651L654 607M601 789L599 720M606 0L453 0M608 266L548 191M608 266L598 296M609 108L551 160M609 108L593 53M609 108L674 132M611 332L598 296M614 453L570 510M614 453L578 400M614 453L672 460M639 549L582 536M654 607L639 549M672 460L684 502M674 132L728 91M682 225L608 266M682 225L674 132M684 502L639 549M717 387L611 332M717 387L672 460M717 387L745 379M718 621L654 607M718 621L750 720M718 621L766 544M723 0L606 0M728 -91L723 0M728 91L723 0M745 379L812 462M750 720L599 720M750 720L718 819M750 720L845 720M757 253L682 225M766 544L684 502M771 112L728 91M771 112L828 91M779 316L745 379M779 316L757 253M779 540L766 544M797 203L757 253M797 203L771 112M797 203L853 194M812 462L779 540M841 0L723 0M841 0L849 37M845 720L973 720M849 -37L841 0M849 37L828 91M853 194L866 126M858 600L779 540M858 600L845 720M858 600L916 567M858 840L845 720M866 126L828 91M876 450L812 462M876 450L911 371M876 450L918 494M892 323L779 316M892 323L911 371M896 217L853 194M896 217L950 152M914 113L866 126M914 113L921 74M916 567L970 591M918 494L916 567M918 494L1013 468M920 274L892 323M920 274L896 217M920 274L988 263M921 74L849 37M950 152L914 113M950 152L964 152M953 0L841 0M953 0L1061 0M954 -48L953 0M954 48L921 74M954 48L953 0M964 152L1000 109M970 591L1037 505M973 720L992 627M973 720L1114 720M988 263L1011 204M991 72L954 48M991 72L1000 109M991 72L1057 31M992 627L970 591M992 627L1074 611M992 813L973 720M1011 204L964 152M1011 204L1018 201M1013 468L1037 505M1018 201L1053 130M1023 399L911 371M1023 399L1013 468M1037 505L1078 524M1046 381L1023 399M1046 381L1050 315M1046 381L1146 413M1049 121L1000 109M1049 121L1053 130M1049 121L1077 76M1050 315L988 263M1057 -31L1061 0M1057 31L1061 0M1061 0L1151 0M1074 611L1078 524M1074 611L1110 640M1077 76L1057 31M1077 76L1146 92M1083 209L1018 201M1083 209L1093 154M1093 154L1053 130M1093 154L1140 136M1107 275L1050 315M1107 275L1108 238M1107 275L1176 306M1108 238L1083 209M1108 238L1176 186M1110 640L1114 720M1110 640L1183 592M1110 800L1114 720M1114 720L1238 720M1140 136L1176 186M1146 92L1140 136M1146 92L1155 83M1146 413L1164 474M1146 413L1186 358M1147 503L1078 524M1147 503L1183 592M1151 0L1245 0M1155 -83L1151 0M1155 83L1151 0M1155 83L1220 88M1164 474L1147 503M1164 474L1255 477M1176 306L1186 358M1176 306L1215 266M1186 358L1288 376M1191 190L1176 186M1191 190L1244 158M1215 266L1191 190M1215 266L1263 268M1220 -88L1245 0M1220 88L1245 0M1220 88L1251 119M1226 608L1183 592M1226 608L1238 720M1226 832L1238 720M1244 158L1251 119M1244 158L1297 204M1251 119L1301 97M1255 477L1276 503M1255 477L1292 383M1263 268L1297 204M1263 268L1300 314M1266 582L1226 608M1266 582L1331 606M1276 503L1266 582M1276 503L1345 500M1287 0L1245 0M1288 376L1292 383M1292 383L1336 396M1297 204L1334 199M1300 314L1288 376M1300 314L1378 277M1301 -97L1287 0M1301 97L1287 0M1315 720L1238 720M1319 101L1301 97M1319 101L1356 167M1334 199L1356 167M1336 396L1440 310M1345 500L1372 555M1346 639L1315 720M1346 639L1331 606M1346 639L1440 643M1346 801L1315 720M1356 0L1287 0M1359 422L1336 396M1359 422L1440 414M1362 478L1345 500M1362 478L1359 422M1362 478L1440 485M1366 -69L1356 0M1366 69L1319 101M1366 69L1356 0M1372 555L1331 606M1372 555L1440 561M1378 277L1334 199M1378 277L1440 295M1388 160L1356 167M1388 160L1396 82M1388 160L1440 174M1396 82L1366 69M1440 0L1356 0M1440 0L1499 -58M1440 72L1396 82M1440 72L1440 0M1440 72L1440 174M1440 295L1440 174M1440 295L1440 310M1440 295L1502 277M1440 310L1440 414M1440 485L1440 414M1440 485L1440 561M1440 643L1440 561M1440 720L1315 720M1440 720L1440 643M1484 82L1440 72M1492 160L1440 174M1493 794L1440 720M1508 555L1440 561M1518 478L1440 485M1521 422L1440 414M1534 639L1440 643M1544 396L1440 310" fill="none" stroke="#5ea896" stroke-opacity=".28" stroke-width="1" mask="url(#fm-mask)" vector-effect="non-scaling-stroke"/></svg>
   <section class="hero">
     <div>
       <p class="eyebrow">Crystaphase 2027 Calendar Mousepad</p>
@@ -269,6 +269,35 @@
     </dl>
     <p class="contact">Questions? Email <a href="mailto:mousepads@crystaphase.com">mousepads@crystaphase.com</a> or reach out to your Crystaphase representative.</p>
   </section>
+  </div>
+  <div class="fly" id="fly" aria-hidden="true">
+    <div class="fly-shadow"></div>
+    <svg viewBox="-24 -24 48 48">
+      <defs>
+        <radialGradient id="fl-puck" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#e2dccd"/><stop offset=".55" stop-color="#b9ab90"/><stop offset="1" stop-color="#7c6c55"/></radialGradient>
+        <radialGradient id="fl-head" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#4a4541"/><stop offset="1" stop-color="#0d0c0b"/></radialGradient>
+        <clipPath id="fl-clip"><circle cx="0" cy="4" r="8.6"/></clipPath>
+      </defs>
+      <g stroke="#1f1a15" stroke-width=".9" stroke-linecap="round" fill="none">
+        <path d="M-6 0L-12-5L-15-4M6 0L12-5L15-4M-7 4L-14 5L-17 8M7 4L14 5L17 8M-6 8L-11 13L-12 17M6 8L11 13L12 17"/>
+      </g>
+      <circle cx="0" cy="4" r="8.6" fill="url(#fl-puck)"/>
+      <g clip-path="url(#fl-clip)">
+        <g fill="#5a4a36" opacity=".55"><circle cx="-0.7" cy="4.9" r="1.3"/><circle cx="-0.5" cy="4.1" r="1.0"/><circle cx="-4.7" cy="4.2" r="1.1"/><circle cx="4.4" cy="-2.1" r="0.8"/><circle cx="-6.1" cy="8.6" r="1.1"/><circle cx="-6.9" cy="11.2" r="1.4"/><circle cx="2.3" cy="5.7" r="0.6"/><circle cx="-7.3" cy="4.4" r="0.6"/><circle cx="-4.6" cy="0.1" r="0.5"/><circle cx="-0.5" cy="3.1" r="1.3"/><circle cx="0.3" cy="6.1" r="0.9"/><circle cx="2.4" cy="3.4" r="0.8"/><circle cx="7.5" cy="11.4" r="1.3"/><circle cx="3.1" cy="1.2" r="0.7"/><circle cx="-3.2" cy="-2.4" r="1.2"/><circle cx="-1.5" cy="9.2" r="0.8"/><circle cx="6.9" cy="9.2" r="0.5"/><circle cx="-4.4" cy="10.2" r="0.9"/><circle cx="7.2" cy="2.5" r="0.6"/><circle cx="1.9" cy="8.2" r="0.7"/><circle cx="-6.2" cy="1.5" r="1.4"/><circle cx="3.9" cy="-1.7" r="0.7"/><circle cx="-6.0" cy="-2.6" r="1.2"/><circle cx="-4.8" cy="4.9" r="0.9"/><circle cx="-4.6" cy="7.5" r="0.6"/><circle cx="2.2" cy="-1.8" r="0.9"/></g>
+        <ellipse cx="3.5" cy="8" rx="5" ry="3.4" fill="#3d2f20" opacity=".35"/>
+        <ellipse cx="-4" cy="1" rx="3" ry="2" fill="#2a2016" opacity=".25"/>
+      </g>
+      <circle cx="0" cy="4" r="8.6" fill="none" stroke="#6b5c47" stroke-width=".8"/>
+      <circle cx="0" cy="4" r="5.4" fill="none" stroke="#8a7a62" stroke-width=".5" opacity=".6"/>
+      <g class="fly-wings">
+        <ellipse class="w" cx="-6" cy="9" rx="4.6" ry="11.5" transform="rotate(22 -6 9)"/>
+        <ellipse class="w" cx="6" cy="9" rx="4.6" ry="11.5" transform="rotate(-22 6 9)"/>
+        <path d="M-3-1.5Q-7 8-9.5 19M3-1.5Q7 8 9.5 19" fill="none" stroke="rgba(50,60,65,.35)" stroke-width=".4"/>
+      </g>
+      <circle cx="0" cy="-7.2" r="4.2" fill="url(#fl-head)"/>
+      <ellipse cx="-2.9" cy="-8.2" rx="2.2" ry="2.8" fill="#5c1f17"/><ellipse cx="2.9" cy="-8.2" rx="2.2" ry="2.8" fill="#5c1f17"/>
+      <circle cx="-3.4" cy="-9.2" r=".7" fill="#fff" opacity=".5"/><circle cx="2.4" cy="-9.2" r=".7" fill="#fff" opacity=".5"/>
+    </svg>
   </div>
 </main>
 <footer class="site-footer">
@@ -564,6 +593,51 @@
       .catch(function(){ banner.textContent="Something went wrong sending your request. Please try again, or email mousepads@crystaphase.com."; banner.className="banner err"; })
       .finally(function(){ btn.disabled=false; btn.textContent="Request my mousepad"; });
   });
+})();
+
+// Foulant fly: wanders the page, lands to rest now and then, and keeps clear of the form while someone types.
+(function(){
+  var el = document.getElementById("fly");
+  if (!el || !window.requestAnimationFrame) return;
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var W = innerWidth, H = innerHeight;
+  var x = W * .7, y = Math.min(H * .35, 300), a = Math.random() * 6.28, turn = 0, v = 150;
+  var resting = false, clock = 0, nextRest = 6 + Math.random() * 8, restEnd = 0, last = 0;
+  var form = document.getElementById("mp-form");
+  var body = el.querySelector("svg");
+  addEventListener("resize", function(){ W = innerWidth; H = innerHeight; });
+  function steerAway(tx, ty, k){ // turn toward (tx,ty) by strength k
+    var d = Math.atan2(ty - y, tx - x) - a;
+    d = Math.atan2(Math.sin(d), Math.cos(d));
+    turn += d * k;
+  }
+  function frame(t){
+    var dt = Math.min(.05, (t - (last || t)) / 1000); last = t; clock += dt;
+    if (resting) {
+      if (clock > restEnd) { resting = false; el.className = "fly flying"; nextRest = clock + 5 + Math.random() * 10; }
+      else if (Math.random() < .02) a += (Math.random() - .5) * .6; // shuffle about
+    } else {
+      turn += (Math.random() - .5) * 18 * dt;
+      turn *= .96;
+      var m = 70;
+      if (x < m || x > W - m || y < m || y > H - m) steerAway(W / 2, H / 2, 3 * dt);
+      var f = form && form.contains(document.activeElement) && form.getBoundingClientRect();
+      if (f && x > f.left - 60 && x < f.right + 60 && y > f.top - 60 && y < f.bottom + 60)
+        steerAway(2 * x - (f.left + f.right) / 2, 2 * y - (f.top + f.bottom) / 2, 6 * dt);
+      turn = Math.max(-5, Math.min(5, turn));
+      a += turn * dt;
+      var target = Math.random() < .01 ? 420 : 150 * Math.min(1, W / 900 + .3); // occasional dart
+      v += (target - v) * 2 * dt;
+      x += Math.cos(a) * v * dt; y += Math.sin(a) * v * dt;
+      x = Math.max(8, Math.min(W - 8, x)); y = Math.max(8, Math.min(H - 8, y));
+      if (clock > nextRest && !f) { resting = true; el.className = "fly"; restEnd = clock + 1.5 + Math.random() * 3; }
+    }
+    el.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px)";
+    body.style.transform = "rotate(" + (a * 57.3 + 90).toFixed(1) + "deg)";
+    requestAnimationFrame(frame);
+  }
+  el.className = "fly flying";
+  requestAnimationFrame(frame);
 })();
 </script>
 </body>
