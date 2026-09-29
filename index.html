@@ -73,44 +73,20 @@
   .band .eyebrow{color:#2f8f74}
   .band h1{color:#2e8c72;font-size:2.9rem;font-weight:300;letter-spacing:-.01em;line-height:1.08}
   .band .lead{color:#5d5d5d}
-  .fly{position:fixed;left:0;top:0;width:38px;height:38px;margin:-19px 0 0 -19px;z-index:50;pointer-events:none;will-change:transform}
+  .fly{position:fixed;left:0;top:0;width:64px;height:64px;margin:-32px 0 0 -32px;z-index:50;pointer-events:none;will-change:transform}
   .fly svg{position:relative;display:block;width:100%;height:100%;overflow:visible}
-  .fly-shadow{position:absolute;left:30%;top:52%;width:50%;height:40%;border-radius:50%;background:rgba(20,30,25,.28);filter:blur(3px)}
-  .fly .w{fill:rgba(220,232,238,.38);stroke:rgba(60,70,75,.45);stroke-width:.5}
-  .fly.flying .fly-wings{animation:flap .045s linear infinite alternate;transform-origin:0 -1px}
+  .fly-shadow{position:absolute;left:32%;top:40%;width:36%;height:44%;border-radius:50%;background:rgba(20,30,25,.28);filter:blur(3px)}
+  .fly .w{fill:rgba(214,226,234,.28);stroke:rgba(50,58,64,.55);stroke-width:.5}
+  .fly.flying .fly-wings{animation:flap .045s linear infinite alternate;transform-origin:0 -8px}
   .fly.flying .fly-shadow{transform:translate(8px,10px) scale(.8);opacity:.6}
   @keyframes flap{from{transform:scaleX(1)}to{transform:scaleX(.45)}}
-  .swatter-held{position:fixed;left:0;top:0;z-index:60;pointer-events:none;display:none;width:96px;margin:-16px 0 0 -48px}
-  .swatter-held .sw-inner{transform:rotate(-24deg) scale(1.06);transform-origin:50% 16.7%;filter:drop-shadow(16px 22px 10px rgba(20,40,35,.3))}
-  .swatter-held svg{display:block;width:100%;height:auto}
-  .swatter-held.whack .sw-inner{animation:whack .2s ease-out}
-  @keyframes whack{0%{transform:rotate(-24deg) scale(1.06);filter:drop-shadow(16px 22px 10px rgba(20,40,35,.3))}
-    40%{transform:rotate(-24deg) scale(.9);filter:drop-shadow(2px 3px 2px rgba(20,40,35,.45))}
-    100%{transform:rotate(-24deg) scale(1.06);filter:drop-shadow(16px 22px 10px rgba(20,40,35,.3))}}
-  body.holding-swatter,body.holding-swatter *{cursor:none!important}
-  .fly .splat{position:absolute;left:-40%;top:-40%;width:180%;height:180%;border-radius:47% 53% 41% 59%/52% 44% 56% 48%;opacity:0;
-    background:radial-gradient(circle at 50% 50%,rgba(74,58,40,.55) 0 22%,rgba(110,92,66,.35) 23% 45%,transparent 62%)}
-  .fly.squashed .splat{opacity:1}
-  .fly.squashed .fly-shadow{display:none}
-  .fly.gone{opacity:0;transition:opacity .9s}
-  .swat-toast{position:fixed;left:0;top:0;z-index:61;pointer-events:none;background:#1f7a62;color:#fff;font-size:.8rem;font-weight:600;
-    padding:6px 12px;white-space:nowrap;opacity:0;transform:translate(-50%,-50%)}
-  .swat-toast.show{animation:toast 1.6s ease-out forwards}
-  @keyframes toast{0%{opacity:0;margin-top:0}15%{opacity:1}75%{opacity:1}100%{opacity:0;margin-top:-34px}}
-  @media (prefers-reduced-motion:reduce){.fly{display:none}.swatter{pointer-events:none}}
+  @media (prefers-reduced-motion:reduce){.fly{display:none}}
   .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 16px 64px}
 
   /* The mousepad on a desk: tilt, rubber edge, shadow, and a mouse */
-  .desk{position:relative;padding-right:17%;transform:perspective(1600px) rotateX(16deg) rotateZ(-4deg);transform-origin:50% 60%}
+  .desk{position:relative;padding-right:4%;transform:perspective(1600px) rotateX(16deg) rotateZ(-4deg);transform-origin:50% 60%}
   .pad{filter:drop-shadow(0 4px 0 #1d2b27) drop-shadow(0 22px 26px rgba(20,45,38,.32)) drop-shadow(0 6px 8px rgba(20,45,38,.18))}
   .pad img{display:block}
-  .swatter{--r:-28deg;position:absolute;right:-3%;top:8%;width:19%;padding:0;border:0;background:none;cursor:grab;
-    animation:nudge 1s ease-in-out 3s 2;transform:rotate(var(--r));transform-origin:50% 30%;filter:drop-shadow(0 2px 1.5px rgba(0,0,0,.35)) drop-shadow(-8px 14px 12px rgba(20,40,35,.28));transition:transform .2s}
-  .swatter:hover{transform:rotate(calc(var(--r) + 4deg)) translateY(-4px)}
-  @keyframes nudge{0%,100%{transform:rotate(var(--r))}30%{transform:rotate(calc(var(--r) + 7deg)) translateY(-6px)}65%{transform:rotate(calc(var(--r) - 4deg))}}
-  .swatter:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-  .swatter svg{display:block;width:100%;height:auto}
-  .swatter.lifted{visibility:hidden}
   .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 6px}
   h1{font-size:2rem;line-height:1.15;margin:0 0 12px}
   .lead{color:var(--muted);margin:0}
@@ -162,9 +138,7 @@
     .band{padding-top:32px;padding-bottom:44px}
     .band h1{font-size:2.2rem}
     .band .hero{grid-template-columns:1fr;gap:32px}
-    .fly{width:28px;height:28px;margin:-14px 0 0 -14px}
-    .swatter-held{width:76px;margin:-13px 0 0 -38px}
-    .swatter{--r:-8deg;right:3%;top:12%;width:14%}
+    .fly{width:50px;height:50px;margin:-25px 0 0 -25px}
     .desk{transform:perspective(1200px) rotateX(12deg) rotateZ(-3deg)}
     .facts{grid-template-columns:1fr}
     .details{padding:20px}
@@ -202,7 +176,6 @@
     <div class="pad">
       <img id="art" alt="The 2027 Crystaphase calendar mousepad: a Venus flytrap biting into a Crystaphase ceramic foam disc beside the headline 'We feed on foulants.'" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 450'><rect width='380' height='450' fill='%23f1f1ef'/><rect x='24' y='24' width='332' height='402' fill='none' stroke='%23c8102e' stroke-width='3'/><text x='190' y='225' font-family='Arial' font-size='20' text-anchor='middle' fill='%23555'>2027 mousepad art</text></svg>">
     </div>
-      <button type="button" class="swatter" id="swatter" aria-label="Pick up the fly swatter" title="Pick up the fly swatter"><svg viewBox="0 0 90 300"><use href="#sw-art"/></svg></button>
     </div>
   </section>
   </div>
@@ -272,58 +245,33 @@
     <p class="contact">Questions? Email <a href="mailto:mousepads@crystaphase.com">mousepads@crystaphase.com</a> or reach out to your Crystaphase representative.</p>
   </section>
   </div>
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <pattern id="sw-holes" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="#fff"/><rect x="1.2" y="1.2" width="2.6" height="2.6" rx=".5" fill="#000"/></pattern>
-      <mask id="sw-mesh" maskUnits="userSpaceOnUse" x="0" y="0" width="90" height="110"><rect x="10" y="10" width="70" height="80" fill="url(#sw-holes)"/></mask>
-      <linearGradient id="sw-plastic" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5cc7a6"/><stop offset=".55" stop-color="#3a9f82"/><stop offset="1" stop-color="#23735d"/></linearGradient>
-      <linearGradient id="sw-wire" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6f767c"/><stop offset=".45" stop-color="#eef1f3"/><stop offset="1" stop-color="#5f666c"/></linearGradient>
-      <linearGradient id="sw-grip" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#15181a"/><stop offset=".4" stop-color="#3b4145"/><stop offset="1" stop-color="#101214"/></linearGradient>
-      <linearGradient id="sw-gloss" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
-      <symbol id="sw-art" viewBox="0 0 90 300">
-        <rect x="10" y="10" width="70" height="80" fill="url(#sw-plastic)" mask="url(#sw-mesh)"/>
-        <rect x="7" y="7" width="76" height="86" rx="11" fill="none" stroke="url(#sw-plastic)" stroke-width="6"/>
-        <rect x="7" y="7" width="76" height="86" rx="11" fill="none" stroke="#1d5e4c" stroke-width=".8" opacity=".6"/>
-        <path d="M34 93H56L50 112H40Z" fill="url(#sw-plastic)"/>
-        <rect x="43" y="110" width="4" height="138" fill="url(#sw-wire)"/>
-        <path d="M43 118l4 5M43 128l4 5M43 138l4 5M43 148l4 5M43 158l4 5M43 168l4 5M43 178l4 5M43 188l4 5M43 198l4 5M43 208l4 5M43 218l4 5M43 228l4 5" stroke="#4d5358" stroke-width=".7" opacity=".6"/>
-        <rect x="38" y="240" width="14" height="56" rx="6" fill="url(#sw-grip)"/>
-        <path d="M39 252H51M39 258H51M39 264H51M39 270H51M39 276H51" stroke="#000" stroke-opacity=".45" stroke-width="1.2"/>
-        <circle cx="45" cy="287" r="2.6" fill="#0b0c0d"/>
-        <rect x="7" y="7" width="76" height="86" rx="11" fill="url(#sw-gloss)" opacity=".5" mask="url(#sw-mesh)"/>
-      </symbol>
-    </defs>
-  </svg>
-  <div class="swatter-held" id="swatterHeld" aria-hidden="true"><div class="sw-inner"><svg viewBox="0 0 90 300"><use href="#sw-art"/></svg></div></div>
-  <div class="swat-toast" id="swatToast" aria-live="polite"></div>
   <div class="fly" id="fly" aria-hidden="true">
-    <div class="splat"></div>
     <div class="fly-shadow"></div>
-    <svg viewBox="-24 -24 48 48">
+    <svg viewBox="-40 -40 80 80">
       <defs>
-        <radialGradient id="fl-puck" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#e2dccd"/><stop offset=".55" stop-color="#b9ab90"/><stop offset="1" stop-color="#7c6c55"/></radialGradient>
-        <radialGradient id="fl-head" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#4a4541"/><stop offset="1" stop-color="#0d0c0b"/></radialGradient>
-        <clipPath id="fl-clip"><circle cx="0" cy="4" r="8.6"/></clipPath>
+        <radialGradient id="fl-eye" cx=".38" cy=".3" r=".75"><stop offset="0" stop-color="#d0523c"/><stop offset=".55" stop-color="#8e2518"/><stop offset="1" stop-color="#3d0c07"/></radialGradient>
+        <radialGradient id="fl-thorax" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#7a7671"/><stop offset=".6" stop-color="#46423e"/><stop offset="1" stop-color="#1c1a18"/></radialGradient>
       </defs>
-      <g stroke="#1f1a15" stroke-width=".9" stroke-linecap="round" fill="none">
-        <path d="M-6 0L-12-5L-15-4M6 0L12-5L15-4M-7 4L-14 5L-17 8M7 4L14 5L17 8M-6 8L-11 13L-12 17M6 8L11 13L12 17"/>
+      <g stroke="#1b1816" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M-7-11L-14-17L-17-27M7-11L14-17L17-27"/>
+        <path d="M-9-6L-19-5L-26 2M9-6L19-5L26 2"/>
+        <path d="M-8-1L-17 8L-23 21M8-1L17 8L23 21"/>
+        <path d="M-1.6-22L-3.4-25.5M1.6-22L3.4-25.5" stroke-width=".8"/>
       </g>
-      <circle cx="0" cy="4" r="8.6" fill="url(#fl-puck)"/>
-      <g clip-path="url(#fl-clip)">
-        <g fill="#5a4a36" opacity=".55"><circle cx="-0.7" cy="4.9" r="1.3"/><circle cx="-0.5" cy="4.1" r="1.0"/><circle cx="-4.7" cy="4.2" r="1.1"/><circle cx="4.4" cy="-2.1" r="0.8"/><circle cx="-6.1" cy="8.6" r="1.1"/><circle cx="-6.9" cy="11.2" r="1.4"/><circle cx="2.3" cy="5.7" r="0.6"/><circle cx="-7.3" cy="4.4" r="0.6"/><circle cx="-4.6" cy="0.1" r="0.5"/><circle cx="-0.5" cy="3.1" r="1.3"/><circle cx="0.3" cy="6.1" r="0.9"/><circle cx="2.4" cy="3.4" r="0.8"/><circle cx="7.5" cy="11.4" r="1.3"/><circle cx="3.1" cy="1.2" r="0.7"/><circle cx="-3.2" cy="-2.4" r="1.2"/><circle cx="-1.5" cy="9.2" r="0.8"/><circle cx="6.9" cy="9.2" r="0.5"/><circle cx="-4.4" cy="10.2" r="0.9"/><circle cx="7.2" cy="2.5" r="0.6"/><circle cx="1.9" cy="8.2" r="0.7"/><circle cx="-6.2" cy="1.5" r="1.4"/><circle cx="3.9" cy="-1.7" r="0.7"/><circle cx="-6.0" cy="-2.6" r="1.2"/><circle cx="-4.8" cy="4.9" r="0.9"/><circle cx="-4.6" cy="7.5" r="0.6"/><circle cx="2.2" cy="-1.8" r="0.9"/></g>
-        <ellipse cx="3.5" cy="8" rx="5" ry="3.4" fill="#3d2f20" opacity=".35"/>
-        <ellipse cx="-4" cy="1" rx="3" ry="2" fill="#2a2016" opacity=".25"/>
-      </g>
-      <circle cx="0" cy="4" r="8.6" fill="none" stroke="#6b5c47" stroke-width=".8"/>
-      <circle cx="0" cy="4" r="5.4" fill="none" stroke="#8a7a62" stroke-width=".5" opacity=".6"/>
+      <image href="data:image/webp;base64,UklGRhQgAABXRUJQVlA4WAoAAAAQAAAAnwAAlQAAQUxQSCMGAAABoEUBgNq2kYzKc1Jw5+SVwR2VwS4zBcYMZUrKzP2dxyszM3PrQJmbBsvolePFacNglO49WTrL0t2Nt4iAJIBt2waQSgRSFTmXLTyA+ouEtDSS4/EIe184z6WEVGuYWtHRtZt1FLNTmwbR0SaDVkNDtojpGK01mJpa+gxKnLJgzer19ivpYp7aumrN8nlJIxI6NatdXacS7RUjh+KprV6/bcLI+cv3Xch96nrl9vv9HIAx4Pd7S1zO21eS130z9pPO5loMLbwbTBxNDXOP4bYtp287S7wsgJCDEbYXX4XLcXnfwonxzU164bLIO/rali9tezOfV/ihjwYIQQkbYt0Ft5KXJPVoYhAsi6oSOl2SVp39tZwVXzgIk/DdcW5n5s7ZceZIOjgdTaU2WhJXXXJ6RFcL5KVwm4HC67tm96ujD05HT+nNn31/Is8Takz2IYGRuTqxXTUaORHVLmnb/QoOAMiYkoYnL3Ve3xgVUiKq/YzUPC8AQOQob7BFGT/FoiJoXllmpOazkPlIGLxflikQKDBSpIQOcsKkfNE1HZviEigkWZZl6xilLFS1v9j6OBBUyLIwbWozrYKIsHx324u0AhxgndveM9KKuQOPFAYV6qzKnKOQqW1lu+0DYiJubo1VYsmo2O0FABtWnRtdRyU3TKPOVQKMGLhve1vepmo07VYA4EXXcisj53NVswWPWYAbiw7G6uXrby99CTCkOzVWT7QOgIdvMnaCNZWgY9wYmTrGLSV8WcfmAljTfdCqCg81xj8AmLN42Rt0ONB/mMHiDpA3zxTO6paDHoA92BtfR0hH7e8KAQHoOyJ9DjPwNkcCgMLvaku9L+sRLyACuNsDJVk0FW0TeESwDreVVmOzAEeIP8A1I4qiJdSfyngQgmxqe0k1E/AkVqEpk7CSo7QLfbPrRQBIUvKSmFDVMNUlrMRYZEtjiobDvMsPyFKux4Wy464DjiwonB1J0dDbswp5EIX+nU3gqLvRBwBhbmb2gMN6DnCkwYthWuiTwicO8qDCVh1WmCmveBCGgS31xaAp4wI3AMQZONUGhpg1fgIhvRMM5n0sgXA7gYb950XAkQfOERoIOqaTCK7E//3HXyu4QiLkj4ahmZ0D5IHjExUEtTf4CYTMbrDPlU3LvATCBQsMhvkl5Blg95lh37uoBz8nD9wLa/EQl56Z5PneqmAiA//aeS9LnJFb8TQUNWzlxCn25vAv7tVfOMgCDpR/b6TgpVUKR5pnhS/4Zy0ojLZSshT2WMtQP2xRvXODJOBA0fxqIUBTjTaT5akroy8d+gDRYH4yOWrZzzEU30IU81YvSV6TxKqknMAaxBdirCysocsmNykql95fJe0I23uZLCGac46RkkbjHCcZULWtGS35OMw2Ilhs5ns66UfF3ssggZXHe9JZc/IT/FG2Nrwf/jda8BJ3eOzd1eEdO2m1vQr3SR8y4Z5W7Jfiwfsn6+NqUuGSiU31YNzvTDBR4VPPN4z7axQlU8O5y9bw7XK1OHsZhr+0vs53+cj0WFuA3ccUJ76Ws1OUuvkvj1ncTqVGyH2ovNHkDIyWYB8vsjKU7Kz54cFCbF7IZUxupKIUIGP57rZP9FYD+eSAmsQKDuAAcAdjA5QMXrBllfMCYeVzbHrPqGxwhSluxUMvLxBVrOvwULOWUpjqRoO2OoICRZWfOqNtBBqBPSLBoacsUcELQ0HogsIDEJkufHwDAiUKPUJEDFyVXcopP120b49jzxShQkrUibWlPBbFMinrBFyXVg58w4BirJWqZqvBKyGxVkqMcaJgq6lda+uQjQXTBWPBLj2v4ADsbuRMBvMUXN81O85sQDddjRYllw37wX6rwM1BrlmO/wXAX+w4t2pirNlABx3kY+mMzeMnLLXnPIOl0nGSCEum++326Y1zP7XUZmjYfNQNmjE16z14/vJ9F287C93+gMRXa8FoP8dV+zpbYkLbegYVBXUwMILUREabrQnDpy5YvfXU1fQMR75LzKe5V9Iv7l2zfF7ip12DyYi0cAzPWEk6GCpZv02njl0/GZ0o5qA+HTpazTEmg1YF2SW2qZzQ1zAaCNWh9kaKUFNJW6Gpfz+SAgBWUDggyhkAADBgAJ0BKqAAlgA+VSKORCOiIZerLkw4BUSyhtgCwaaPs3N3pPbiT53og5sPoo55Pzht9A9ADpfv7x/xf2k9lDNEf5v2h/2f8b/M/8a+XfxX90/cH+6ezh/h99bz3+G/Yn1M/jn28/cf33ze/4/gf+U/qn/G/v/sC/kH8z/yf9q/d328/cv+l24uif4b0AvXr6n/0f8d4wup37nfgvYB/n39t4ougJ9zv3D/Sd/h/+3/XfmZ77/0P/Uf+T/QfAX/Ov6v/t/7x+93+R+ZnzSfY4/WxyeZriVQ0adWoAPsDzw6Z+rHEi6WMf+o88ytpksPIfk+NuySnJz/Fx+Ekwx/tmrVn+DPW2R6cox7eu84PC3cmdgsCopk1uqGTNfR/XVZ1jcImiF2dAn7WxFvEjyTiiFuHPydHtYrnoQ6+09i/S74RxyE/Z3RsJBAktiJap8pbu6NhZt/05WTK9/IM9GsHh+PzpLZcLXW7DAXLiAeIb0YMe9FZr5A8QgIdTNCo6xqfvl+XARK5Hut6fjjNshirgJ4V6oAg4fwVmjAF/Cig8TA5QAgKNagz4A8GsNRTKmfj3PgI2usN/8kTek1Rv48eIhXy9xgzN88k7U56CX276Bb+7dpaLOlX9Eg2b1umuNKmD4mOmaenwtXdRy/FSBFvmkFU+HFFR673YHsa9lV8Y2DtU4JTomOOOjOh48Zmjdp7pzSLEu9oWd7iKaEASSQ/J9JwBPYBMyya7s6Ocv0gCzrnTYqueQ32qs0F0e9Wv/2QXsZMSBqInmsvt8i/r/3dvBuqJu1oXWvbxfrftFEfEgyiEOY2AfoxWf3xAdnTklCyw0NLkuLQr2ZdL+1NPr+JhzNB7wMbpPUO6jU530v+dkP+hzxm+dJfvwO8fFt8II06p7hpKZrKKKUXIvxlT2eRr+XFq1G6AFm/LbD7cF2B2006b+uadWE32uYJ8Tboi+BvUxhOMYlqgn3aCre286gGhNFKRIYNssgaTUVbdlIfNiDIImCFblTBG4VAwReyLavmLmLWvIdm5AxUcAA/v8NZDxhCbsF+sKvsbUZz8qw4TiHfj6U8FXWnEU8Yfx9x1hPKlvwEae6NXrbypX/kn/u8QI1sk8F+yyQ6vFqewNlWbowoRf1AV6ulH1t6f8WP7a83po3pMnagTi23kLAgZS2/knI/uB13fYAe6cg5Hav+7dblZpomXVsBVa0qOuDn7iM9wph/89++g2kQrRhEY8WEX8/FxPQi1X8OO6tT8XJXrtpkC/ZA2NmLB10rTywLXRpCM7vH8XpzU5rbiMP340/RTwniX+gW89NAFya/u/CUVBB1/+OKPVHiNQ5wgj4os8PZ/B4n9UeOy4nHPUs1fhPLFuBCyDndHxB/3Rp99Cs55dVa4iJGALZgSTbC53mpliXOCWyS28kts319utWrhqzNZUPQxKIH/clvllLJ1kuVf+ZkhNzj7un4natWV2zYF3J9/j1i/sYUwPUenp95dPJsk7SeqD8KPtIGhROEOjQSn11Y9U0Ie7eDxIyxkhjzjDn4AYgL0Yi+8yDUEEDBjCnUaU8T/p9p8EjKJpdvee3NOtCXIabQfvAs2x6a4EvGZS8GXzviFOqiAEcpGwEwgSqTj/ICcbsR/HI8J0tkqL6ndVSpR88WuqJt8BrRj21ilgiAikH4DJx4rRcclP2Aoxgb50+rXOKH8Xky2kYLX+/fo7AVlcaBKNn7XnFH7xZkMGy/LS2eXlXZ6Jwis82Vb57ZfcWMK+0pQQSmkbyi+B/jX9BOIo3qAc7ZQvmPs4iDa6uXSrPeImjeGCSNgPSDffpB8vUjdv7zaTFMmThNuQCUYs94lR8kGQiQcUmfowvYn1vpkMrvdu9GpGWlBI6MNxlKLaZKs+QlzxzwQyUVJ9Svlty/xrS7fQA2L0+am71GCCpRebjYa5TN7bWIvcHmMyMvIioBzpr5sjbaLfschSBSBRveayH9OZZ/5TtAMtjXTMk6GRBb70yHFYDLYZ7UK8mz3FOIFp+3xMfaysL5M2Cn961uM8JLJoe9Fpl93xtE5v17CYt28A0I7ATEO+pbD8U0umV4jnpbH4tz7eKF5yv0w8QGUeWkwbn5A/B+z3Z8jav6bSjS2J7XuuXinVVM1Vj52rwWlZcJPaPB+fNodnIno8zDXo2qKDfxZ31P4pz83mQ8EsHoYW1Z8OkOZDJZOmQTa1SvInj+Xq3nibIwC/95B9FH/gmOTmIALPFIU56xs6kxpKJzcGzZQ2mA2vcQlBnKt2FXY5wkrJZUeMWgbgWHOXnVVg88FcCJRGmMg/Ko0cBmI29kYBpqbmZVag1SKwvNfqSr4aLWwAufAvGl9mhd+4+hvFtmDDYuFABIZrXXxz0NhHwy+kXNlvhSd7UPXzBPF+uR9IG43aT0kDtDUtZwe3fr+8byecwS0fXj/7WZEEDiUDLZsHyyefLmZbxQoLSISQky8TSnHfQo3zXO2+cr45hpdpEp2IAiYrQucMaqm7KfK/5/dHeKBy+BTIomARxUFsl6fRn/Zt9JgYRGbsnDNdUL/2SN2PO6RWV+M//Pkn2NKOanv1IIMcMw0v85JbmRnOoUkeUaXOza4IU3vVQH2ONn76vUPrXl1N6UnEg1/AfyVmXHUYZdVV4mP75bpPiuxPdnYf//YIWkMcUwtnI22o2Hj/XbdgfsRYE+ZXnonYjPn18+e/X1FtUPJYXyGmhBYMPGWkehhGIbzFpDAaQGD3+G6N4kjWj95aoYDlrI6f7oNM5rHYjlEwJR2FbQXbozXHD88DBxhKNBX1fwflmUkRhNhx5ZFQE2k4cF5aQNEi1p26uPvJoO72BSbRwEtu/biz7a3RwXnF7F8Dsw7PKyt9GK6O6KzmAOeTyavueCjdgzdhTWp0LDiOZ9ieKavMRTKlaSbamHar45zS7lj6IL4AXrl9RHAetleGZYWIB2WvA9Bki4Y4qAO8SBSTMJES2icy0a72t66bgIFVNlSz7ddQUe3tHhnzmf43gDPIy2ZQCwSYQ94YohCuggo6rrUGJ+4+Ab2BIu4h281ECPc8INQ88g6V0QABVqrAM9ET5VdgycPrJDmWzLMV1jlItw1uJJn52r6RAurQ/nKmHPL/Br9wasN3I6BOmJ2/75uJsA7WWIm15HUVdUROH45w6WVoc+F8ZlvDzWVkfV7V86TaBhkH4eMMU2lbd5Ak0QNui5VzzbzIdsD9b/WKdzWEK1f4Q3OJNMZl3D6LiVoKEzUk19U/zXyUT78DGhkx6mIwGiYBrH720XjyYlpKy4LJ0EYUqHLDWhF5Joq97x1k5kAYyLNZcxd5wC1EaAxQXvCGQd/aTlOdwRPwGZSQWpuOIaPiagd3OiDoV7Y8ciatNXRnuv8RdSoHYYJ11SwDop7BvShVRmWPCTw93wgy7OwManDnswnajNztbGpDWJwYpu21BtcsZ8WUMRgJpynGO7gxwwvqgQTS/gNu/u5biPru8X3u0oFSG9l+KQooQvvkZNN4SUB/tR5CHiJIEcQCfmbPLacJgnL51kmWRjiZujMDDj5ZLQWv51amKIOgjgpsGbvTBl5XmYzmp4hCQwuxJJEL5L/dmGbu5mjXuIpCC1OjrWumXfDrdZHZ0AWA6HEBZ4AMvgrBzlusDd+ERvNlH1pyU32lUjOY0uWaIgd5Pxh2Z2kAOFdds5N4wy4G4eg4mDhNWlASkJsRjjy0ouByTwGwZkQSnu+ZfzfPn1h112u02iEWS9SJ33Yarz9T4JMordzwJ5X4IUcGsgAUuXtSQRas21h0rjh4YEmKxUaZlSxgSCWANRYwuwQdJunA8wTcNeKFLOax6QZIyaPV8YJd86IS3bmMrLR+l3w9Em43GZTa6bx+rF1Gl270JWk4oKrc3C3eTwo1//27DOfLmYG8ES+k2UUwSR78xiJe+dTPHBmzbeNPpvcuLOkrQhBf9xouXmmxzGRkUtsq72AviPrNvNB6Wh/ooX8RlSzHopKtQDuKDdHkxsdubmwgtyGH0NTNJx8ll+X1KbRTAbgtau7WehLB9QxaPKlLQCpWlR5M9/12HTw6TqwIse6iyfCKzkrkx5emOF8ij+n9LJYdn2uF40x4m8QvTlzv+xIsg/t+D2RrjrSXrVGKL1yLpRFfwWSPApGS5PCzoo9UIyF7LJrwBhwE1RbDmfJiCFTvoXgu1vgPrfbpubI/HnnCVoHavfwNS0wx3CI26MnF1OxKC+AmHPPmSwD3lSOu6bTEzkhWNrKSoQdzKayKldwuWTmj3d2/PWjpO9sgjO0QXaVl0dEWfo3qJCWrqh/jreI8FXhLwd98PG7jptFpH2OC31mY8X3GeVklZ/Dy6nxcMT5ZepWrLSyFYI+Khmhp7bfzIiEO4dOwsNOq22jCTTjBtfVWcIWFGudEqPmT/Tm0zY4TlzFz4TgTdaXCROWg5fl56MLnYj8ZAT5ZeeK2YW1JQolyBbiQvOA6+PNBZoQHplOi+qXnUxRs7GA0/WE2L4cmu7oknDcdaneEB1GvUg2N0UusvTJ3MDqp11eXaUMCnXTBv+nrWSHVpZtg0hZNZQ7u+maQk0RhAy5C1GRVf9xCbrhKBHX/TNc+kA7pd6HaVuhkdfgtrsx19ufWSaOfBQVv/gh4LoZWmD3toN2AhjqA3vQPXKtz7Nu8eUKeVaySpS8Q4zf0pzXc4Zp4nXVla67rtjRgzLv+XIKtrhYFvAul5841TEo3DGbNvLZGexGBCUVyFMAyicqHKac4Y8ZVC1M3FAHxafF3PBHJfuzw+aFBdbqTUlltEeT48FBoIYuWNU6dBP7LOvJ3p0Vd+D9poAc4t/QuaRXKDmEitLZGdwBIpWIALvSrHT8bC2VFCqOE9kGfwoTXsccLyqPz+aBhqeIPWcpDlwlwunwql+afrBG65mfMwmJqgOCgPbi66xy2gzMsIbZqVHIOV881TojMoECFapWf2pi3MoZMtZdyQC0ooHsCHBThrehfuP7+OE2ZFO53u6gl1wRcly/DfBV3PbgOfseDxmQm/9tcabeq9L7D4MlgQfMbd4k3niKTOut/e6jllEEIckFdcWpYg/L8hOmKbjRu002xVCaUvHocHATTM3DmHuCNIvA+kDWHYWJ9xynteW2mXUXxPzmOueIdR4+oaRw54WytywVI5/FJQ3if3K4PdIjOxt2jbpCWkQVASi55889oFYcaF8Kt2Sx/aNjDmri1LMDA8vBX/WFfgrOq4f+MeO6Jtvt53xCNhRp1bwM4Yosaq6txH4rKpD1d4VXVdIrU+wep/rYY0Kx31JExTlWyJnQsvQ7ykBu+N/loA6s9atRKTq9L2rD85IhAkcxgSM7v9b9KIwZltjIj+F067HH6HKGm8QnqNxy9rIeiOYZm9W2E76tzOrEBqx7FDPgstPpPgSpDQlDIy41crgs+IUzShXbZk629N9QuTzzAGnhpZK5Zfk+4Y6NETPyJhm15x4lFq3YgxXlBCjAs4NnYmRxa53m5ponWRPBxJbyKJtYzlR5zYHVdPBSn5qlGoGSD6wZruybOIfpI3jau6ZbpN6ZN+/bTLWxONzu627cnPN7528JkcN8MwWyC0hN8N+Z+Dhqi6FBX0NCtChe7JpyZj5Hb+zUHEzR2WVvmtjrxxinm93S6sW4X6Rwkhva0lpIGWOEOrYJ6xqM82EEpGbwn0ESVVIl3ZFZnz0hntncn+twIaLjl9ATa8xDRCnqZ6PbZxMkorQ2rwXSKpVzQt/iFQmfPpTVyXGHqCFgReNqtB7BDP0yUZ92rAWSv/2P5cW4SBk/VT+kgzRd/KL3lEv3qzEE0lXnYX5pkJ622i4eKHkZlKI67k2MLY/Ce4WOvmCBMtR29U2CLu5WcubeGN4+ncPkKPSG+JrBVPGlaPRjJy6h0NZqWIas/dkufOiP6eA6BuLuidCWiaNk4YhTXuCI68Nos6X/ZGCk27s/RBs89zpGISoMV0A0ePW1Z8ojf4Lh66jFf1YTAVRvA61e8wIXFAjCQE8UKvTJd1wBmQiQ/z5kCvtCd9+T2aoBqQWf02qfG7Jj1XrB12NBcbHUVAfukBGxiGkm7VFMkze9nBAdrtQfEwF2skfIPcv+2aR+TZY+GwmCYk3tlAUzHYgge0Hu51ydEfHltNkgmE+0pc8Q8OTp03oMxCNDuySAzcboxCsPJ23vSP74+to3EyND6j7EnFLbrJ59c/MlKEfm6humPECJF5kL+h/lv3qrmlEzk10VTRj/CTbLiwHCl/lq4nDo00imZT/nmfgRIgcvFVLMTvt5bUuybdAsOLPF5Tayimla0mJ9+pH/v0wzXdm+Bk7HzhJabnhznCV8dxZGBtEIYzjKEcvvH+lCkIdeGf4ISD80W6zUrDbk6hju35IqC9Zag/ql42nlt7BN2/3Huv+GJ5TPLVy0XlWxoTwXFeZmL2EeshzFhk3ZfeGHJCuectSjvpulmghf7WgxVOG0FUJ3KjXKBF2136HTgvTrDeiDQ4FWNCvdAN9g6clu6nR96lRQPhhFvL2lefnUcEG7nFx5vYcOqROyTirLduH4Rxd1P2Gc0siCoIEqgIcHP7nqGSPmO2O3ld1nb0HB2SNZUwyt8BqherF5igstX7debncJV+hjBk2BTkzoduCDfrJGbGAkJI8cM+J+1rvl/tFjK1qHxP/zlDx230V6zXmhRMAmp2IZ5bInpltJWgeKptH4GqhUb3kM0f+3JM6xA2UlFB8Dgqjqrv5FB+3L0eXDrDjg8YlqkuYFTxRprxxuiOt6QQe7iJF0aKKM/LJFtmOPnZG2FpxMniFJRBuf4zH7v+ovNM9PTWmnKYqLzc+44j0Y/iDbvJAp0nHjySbFz9FEOGTUBqeCmtIbtzSoIMpFuxs6m9Oa+gctpjYmQoJUbhNkZWyWBrJmUphNDTed0Cn5KG977q8RIbXMPnBAycIbp1nRgFtZEYY/B7xKkraGs4NQNcjuNyyPQJ7mNGbjAJBlgLsD7VVZDUAJsdhjSdE74BVt09NIPZWL8T1zD5kocMD3xL5MJKFFvzKxVK/MVkGxeJh9V1M8CvP4/AFXLa4dvtt5L3xZ52Y1VX8A/YWvKdOPLg3kB3mj5X/Q/kF9DA9c4S7TwwfQqERit6W83ITPrNRymwzNE3PuiJCW51R35E2HM2gmBWWJSdxYeT+WQu3q89V3aGDcNqK1u5d1ck4AXvfFIF38J0i5FIULJP9xtywaNRZ4fVj1BUij+yXYNg0tFL5boL2aeapH9mhd5tKwngS0cOtleHDLiQVqTAehFxwq7jRLSUKZBEuxebUqfouPqYCwVJbiHyxsS2/+cbKe+iGaWR2bmPmt63IQ3Av8FVuXdLYSAQ1j1XhvI0hugDLcHp8z4qSLkydmN0nXTs3RgPvOuzqLlvHAGmsLUWalJXSjVggqPQoDAntBKEO+CAVRDx1UdsOoIUEunmpoKVdDco8gUIuCQpyRQKlUwoSCbgvajQavHDT7ObubiLr+UkjNNYwZ7stGGRoLg49G0VPZh/A5X+jtL3ZV73WdZBiV3JzF5f+6DKwdCiyInxfBv5fhbPQ82SkfxRY4C8RYUtIJEZjdkUEe81p9GaB7dcWZ6ZAyjUtvDCYyKUaENecFaynl/F09bIe8axnatVG3jpwzPAIi/2TOdMAqQ2ZQ2qeTYXooV1Aqu2oFTldmhZdbHw6+IF2GnJVm/D7bB9ovib7zbFwldgYPLTc3zeKDJXn2j3VkrtuWX8+HLgezWtPB/X+RLzBYMMiMSTGYRlc+rl7FGoGRAdz3Wa2AZLjrXcLFq5LnLB6oaGZ013jKEdITDA2yN3FxCVSHxTlSGh72SCC0X+jJAydTrItlR6/NcwNMwhIcx1mOmv0XSFk5JscuNVkSjMibz2PBh60SsV6Mwg7dJSLE7gWahefx1/rJmhDNObnjtUkOWTJxwxBEWXuae4SFMQytMJM/uHQZ+V0flrjMKbGh8lZtlcsqkNUDaezDKPdTNsWAkk3HA1xZhMxp2JK4bqx0y4/iGtTPHfwQZGRPgY1fn29C0RzvrOVzSjDSoYwaBKqUPIilzzk8M1f8AZEcE/cCWBJGx8eSqQ3l44oDZ7s9eSkpy3FRwZAuN7mn44N/Ab7r5LPg6/xXunNVYUpDiEHWjA1AxH68n8ndLXRw8iHdPQevBs+29h437sgchfGFa0MOf85qypjT/DOms9qZA557XUBYcApZfxIdun01f6QiJeZSzbYeiJaih6OlF/+H89DIa2VsEGotB4tt74WTNMz4gZdiL4jbu4Jv2A7/mX2AWFs8CXizrZsVN+Jx8AueFySWQohtNAG48iRlPYdpp7ghV1OXf+SxTiJ8X6aAvS7fk/FU+vX3bERrIOh1lmH+Gv1L3Ttv/BIIOBDVJNa7nhrQx/QY8tTGB962XbMPzr2/RQAia95xGOZcXF6Jl7l/InGQdYJ+rXg+fi4XU6KARZLNbeb62/OhFWflnBjfAesoL+H01ruULtga/yGQFdd6Wc6Whlx0WKRNSIJ7LXtQBnNm9n7pHB6izogsI2oLODS5Az7On5izstCQLFop7PxJggdGS3iTox5ynelGgW6L39pS/u3/eTSvJfStRqDlHsBXGSYedlbtCnTz9sJFOmxk6/Fx6PETAqeUZPX/kIVURqFk2AOTtTPa4c19n8PbXwgj+Q7O4V0BlGmBkWYwrHk1YoXqF5R1qY3ph37VecY/tCEWtM1PwSuptX5KXjVxkAk+vLoqz3fZ8X2vyskuxv1AIQ1AC9u+LBGRtvAIO+mCxkX0h6xoDlVGAT1ykOBNJjWbI8gw4EHcZKAKqLAf+ruJzeAAAAAAAAAAAA" x="-20" y="-4" width="40" height="37.5"/>
+      <ellipse cx="0" cy="-6" rx="9.6" ry="8.8" fill="url(#fl-thorax)"/>
+      <path d="M-3.6-13.5V1M-1.2-14V2M1.2-14V2M3.6-13.5V1" stroke="#141210" stroke-width="1" opacity=".55"/>
+      <path d="M-7-9l-1.4-1M7-9l1.4-1M-8-4l-1.6-.3M8-4l1.6-.3M-6 0l-1.2 1M6 0l1.2 1" stroke="#0e0d0c" stroke-width=".6"/>
       <g class="fly-wings">
-        <ellipse class="w" cx="-6" cy="9" rx="4.6" ry="11.5" transform="rotate(22 -6 9)"/>
-        <ellipse class="w" cx="6" cy="9" rx="4.6" ry="11.5" transform="rotate(-22 6 9)"/>
-        <path d="M-3-1.5Q-7 8-9.5 19M3-1.5Q7 8 9.5 19" fill="none" stroke="rgba(50,60,65,.35)" stroke-width=".4"/>
+        <path class="w" d="M-5-9C-14-8-26 1-30 13C-31.5 19-28 21.5-25 18.5C-18 11-11 1-5-9Z"/>
+        <path class="w" d="M5-9C14-8 26 1 30 13C31.5 19 28 21.5 25 18.5C18 11 11 1 5-9Z"/>
+        <path d="M-5.5-8.5C-13-3-21 7-27 17M-5.5-8.5C-15-6-24 2-29.5 12M-15 1C-18 4-20 7-21.5 10M5.5-8.5C13-3 21 7 27 17M5.5-8.5C15-6 24 2 29.5 12M15 1C18 4 20 7 21.5 10" fill="none" stroke="rgba(40,46,50,.45)" stroke-width=".45"/>
       </g>
-      <circle cx="0" cy="-7.2" r="4.2" fill="url(#fl-head)"/>
-      <ellipse cx="-2.9" cy="-8.2" rx="2.2" ry="2.8" fill="#5c1f17"/><ellipse cx="2.9" cy="-8.2" rx="2.2" ry="2.8" fill="#5c1f17"/>
-      <circle cx="-3.4" cy="-9.2" r=".7" fill="#fff" opacity=".5"/><circle cx="2.4" cy="-9.2" r=".7" fill="#fff" opacity=".5"/>
+      <ellipse cx="0" cy="-17.2" rx="9.2" ry="6" fill="#2c2825"/>
+      <ellipse cx="-4.9" cy="-17.6" rx="4.9" ry="5.6" fill="url(#fl-eye)"/>
+      <ellipse cx="4.9" cy="-17.6" rx="4.9" ry="5.6" fill="url(#fl-eye)"/>
+      <path d="M0-22.4V-13" stroke="#b9b3a8" stroke-width="1.2" opacity=".7"/>
+      <ellipse cx="-6.1" cy="-19.8" rx="1.1" ry=".8" fill="#fff" opacity=".22"/><ellipse cx="3.7" cy="-19.8" rx="1.1" ry=".8" fill="#fff" opacity=".22"/>
     </svg>
   </div>
 </main>
@@ -623,14 +571,13 @@
 })();
 
 // Foulant fly: wanders the page, lands to rest now and then, and keeps clear of the form while someone types.
-// Pick up the swatter beside the pad to swat it. A new fly buzzes in a few seconds after a hit.
 (function(){
   var el = document.getElementById("fly");
   if (!el || !window.requestAnimationFrame) return;
   if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var W = innerWidth, H = innerHeight;
   var x = W * .7, y = Math.min(H * .35, 300), a = Math.random() * 6.28, turn = 0, v = 150;
-  var resting = false, dead = false, clock = 0, nextRest = 6 + Math.random() * 8, restEnd = 0, last = 0;
+  var resting = false, clock = 0, nextRest = 6 + Math.random() * 8, restEnd = 0, last = 0;
   var form = document.getElementById("mp-form");
   var body = el.querySelector("svg");
   addEventListener("resize", function(){ W = innerWidth; H = innerHeight; });
@@ -639,76 +586,26 @@
     d = Math.atan2(Math.sin(d), Math.cos(d));
     turn += d * k;
   }
-
-  // ---- swatter ----
-  var sw = document.getElementById("swatter"), held = document.getElementById("swatterHeld"), toast = document.getElementById("swatToast");
-  var holding = false, px = -999, py = -999, idle = 0, reach = 44;
-  function place(){ held.style.transform = "translate(" + px + "px," + py + "px)"; }
-  function pickUp(e){
-    holding = true; idle = 0; sw.classList.add("lifted"); held.style.display = "block";
-    document.body.classList.add("holding-swatter");
-    var r = sw.getBoundingClientRect();
-    px = e && e.clientX ? e.clientX : r.left + r.width / 2; py = e && e.clientY ? e.clientY : r.top + r.height * .2; place();
-    reach = W < 640 ? 36 : 44;
-  }
-  function putDown(){
-    holding = false; sw.classList.remove("lifted"); held.style.display = "none";
-    document.body.classList.remove("holding-swatter");
-  }
-  sw.addEventListener("click", function(e){ e.stopPropagation(); if (!holding) pickUp(e); });
-  addEventListener("pointermove", function(e){ if (holding) { px = e.clientX; py = e.clientY; idle = 0; place(); } }, true);
-  addEventListener("keydown", function(e){ if (holding && e.key === "Escape") putDown(); });
-  addEventListener("pointerdown", function(e){
-    if (!holding) return;
-    e.preventDefault(); e.stopPropagation();
-    px = e.clientX; py = e.clientY; idle = 0; place();
-    held.classList.remove("whack"); void held.offsetWidth; held.classList.add("whack");
-    if (!dead && Math.hypot(x - px, y - (py + 4)) < reach) squash();
-  }, true);
-  addEventListener("click", function(e){ if (holding || document.body.classList.contains("holding-swatter")) { e.preventDefault(); e.stopPropagation(); } }, true);
-
-  function squash(){
-    dead = true; resting = false; el.className = "fly squashed";
-    body.style.transform = "rotate(" + (a * 57.3 + 90).toFixed(1) + "deg) scale(1.25,.6)";
-    toast.textContent = "Foulant removed.";
-    toast.style.left = x + "px"; toast.style.top = (y - 34) + "px";
-    toast.classList.remove("show"); void toast.offsetWidth; toast.classList.add("show");
-    setTimeout(putDown, 900);
-    setTimeout(function(){ el.className = "fly squashed gone"; }, 2600);
-    setTimeout(respawn, 4500 + Math.random() * 2500);
-  }
-  function respawn(){ // buzz in from a random edge
-    var side = Math.floor(Math.random() * 4);
-    x = side === 0 ? -20 : side === 1 ? W + 20 : Math.random() * W;
-    y = side === 2 ? -20 : side === 3 ? H + 20 : Math.random() * H;
-    a = Math.atan2(H / 2 - y, W / 2 - x); turn = 0; v = 220;
-    dead = false; nextRest = clock + 6 + Math.random() * 8; el.className = "fly flying";
-  }
-
   function frame(t){
     var dt = Math.min(.05, (t - (last || t)) / 1000); last = t; clock += dt;
-    if (holding && (idle += dt) > 8) putDown();
-    var near = holding && Math.hypot(x - px, y - py) < 130;
-    if (dead) { requestAnimationFrame(frame); return; }
     if (resting) {
-      if (clock > restEnd || (near && Math.random() < .08)) { resting = false; el.className = "fly flying"; nextRest = clock + 5 + Math.random() * 10; }
+      if (clock > restEnd) { resting = false; el.className = "fly flying"; nextRest = clock + 5 + Math.random() * 10; }
       else if (Math.random() < .02) a += (Math.random() - .5) * .6; // shuffle about
     } else {
       turn += (Math.random() - .5) * 18 * dt;
       turn *= .96;
-      var m = 70, inside = x > 0 && x < W && y > 0 && y < H;
-      if (!inside || x < m || x > W - m || y < m || y > H - m) steerAway(W / 2, H / 2, 3 * dt);
+      var m = 70;
+      if (x < m || x > W - m || y < m || y > H - m) steerAway(W / 2, H / 2, 3 * dt);
       var f = form && form.contains(document.activeElement) && form.getBoundingClientRect();
       if (f && x > f.left - 60 && x < f.right + 60 && y > f.top - 60 && y < f.bottom + 60)
         steerAway(2 * x - (f.left + f.right) / 2, 2 * y - (f.top + f.bottom) / 2, 6 * dt);
-      if (near) steerAway(2 * x - px, 2 * y - py, 4 * dt); // dodge the swatter
       turn = Math.max(-5, Math.min(5, turn));
       a += turn * dt;
-      var target = near ? 300 : Math.random() < .01 ? 420 : 150 * Math.min(1, W / 900 + .3); // occasional dart
+      var target = Math.random() < .01 ? 420 : 150 * Math.min(1, W / 900 + .3); // occasional dart
       v += (target - v) * 2 * dt;
       x += Math.cos(a) * v * dt; y += Math.sin(a) * v * dt;
-      if (inside) { x = Math.max(8, Math.min(W - 8, x)); y = Math.max(8, Math.min(H - 8, y)); }
-      if (clock > nextRest && !f && !holding) { resting = true; el.className = "fly"; restEnd = clock + 1.5 + Math.random() * 3; }
+      x = Math.max(8, Math.min(W - 8, x)); y = Math.max(8, Math.min(H - 8, y));
+      if (clock > nextRest && !f) { resting = true; el.className = "fly"; restEnd = clock + 1.5 + Math.random() * 3; }
     }
     el.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px)";
     body.style.transform = "rotate(" + (a * 57.3 + 90).toFixed(1) + "deg)";
