@@ -19,20 +19,19 @@
   - Before submitting, they see "Your shipping label will read:" in the exact
     format the destination country's post office expects, and confirm it.
 
-  WHAT YOU RECEIVE (JSON to your webhook -> one tracker row)
+  WHAT YOU RECEIVE (form-encoded POST to the Zapier Catch Hook -> one tracker row)
     firstName, lastName, email, company, phone, quantity,
     countryName, countryCode (ISO-2, what label platforms want),
     line1, line2, locality (neighborhood/colonia/bairro), city, district,
     region (state/province/prefecture), postalCode,
     labelAddress  <- ready to paste; lines in the correct local order
-    + campaign, submittedAt, utm_*
+    + consent, campaign, submittedAt, source, utm_*
 
   SETUP
-  1. Receiver: Power Automate "When an HTTP request is received" -> "Add a row
-     into a table" (Mousepad Master Tracker 2027.xlsx) -> confirmation email.
-     (Or Zapier: Webhooks Catch Hook -> Excel row -> email.)
-     Duplicate check: look up email first; if found, update that row.
-  2. Paste the trigger URL into ENDPOINT_URL below.
+  1. Receiver: a Zapier workflow (Catch Hook -> Google Sheets tracker, matched
+     on email so a repeat submission updates the same row -> Outlook
+     confirmation from mousepads@crystaphase.com, BCC April).
+  2. Paste the Catch Hook URL into ENDPOINT_URL below.
   3. ART_URL points to assets/mousepad-2027-flytrap.webp (swap it if the art changes).
   4. Add a country: copy an entry in FORMATS (or map it to a shared
      template in COUNTRY_LIST). Anything unlisted uses the international template.
@@ -288,7 +287,7 @@
 <script>
 (function(){
   // ============ CONFIG ============
-  var ENDPOINT_URL = "PASTE_POWER_AUTOMATE_OR_ZAPIER_WEBHOOK_URL_HERE";
+  var ENDPOINT_URL = "PASTE_ZAPIER_CATCH_HOOK_URL_HERE";
   var ART_URL = "assets/mousepad-2027-flytrap.webp";
   var CAMPAIGN = "mousepad-2027";
   var MAX_QTY = 10;
@@ -561,7 +560,9 @@
     ["utm_source","utm_medium","utm_campaign","utm_content"].forEach(function(k){ if(p.get(k)) d[k]=p.get(k); });
 
     btn.disabled=true; btn.textContent="Sending…";
-    fetch(ENDPOINT_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)})
+    // Form-encoded, not JSON: a "simple" cross-site request, so browsers skip the CORS preflight
+    // and Zapier's Catch Hook parses each field on its own.
+    fetch(ENDPOINT_URL,{method:"POST",body:new URLSearchParams(d)})
       .then(function(r){ if(!r.ok) throw new Error(r.status); form.style.display="none"; document.getElementById("thanks").style.display="block"; window.scrollTo(0,0); })
       .catch(function(){ banner.textContent="Something went wrong sending your request. Please try again, or email mousepads@crystaphase.com."; banner.className="banner err"; })
       .finally(function(){ btn.disabled=false; btn.textContent="Request my mousepad"; });
