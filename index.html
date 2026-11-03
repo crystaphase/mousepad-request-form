@@ -22,6 +22,7 @@
   WHAT YOU RECEIVE (form-encoded POST to the Zapier Catch Hook -> one tracker row)
     firstName, lastName, email, company, phone, quantity,
     countryName, countryCode (ISO-2, what label platforms want),
+    addressType (Office / Refinery / Home),
     line1, line2, locality (neighborhood/colonia/bairro), city, district,
     region (state/province/prefecture), postalCode,
     labelAddress  <- ready to paste; lines in the correct local order
@@ -204,6 +205,9 @@
         </div>
         <div class="grid" id="addrFields"></div>
         <div class="grid">
+          <div class="field w3"><label for="addressType">What kind of address is this?</label><select id="addressType" name="addressType" required><option value="">Choose one</option><option value="Office">Office</option><option value="Refinery">Refinery</option><option value="Home">Home</option></select><div class="err-msg">Please tell us what kind of address this is.</div></div>
+        </div>
+        <div class="grid">
           <div class="field w3"><label for="email">Work email</label><input id="email" name="email" type="email" autocomplete="email" required><div class="err-msg">Please enter a valid email.</div></div>
           <div class="field w3"><label for="phone">Phone <span class="opt" id="phoneOpt"></span></label><input id="phone" name="phone" type="tel" autocomplete="tel"><div class="hint" id="phoneHint"></div><div class="err-msg">A phone number is required for international shipments (customs).</div></div>
         </div>
@@ -237,7 +241,6 @@
     <h2 id="details-h">Packing, shipping and lead times</h2>
     <dl class="facts">
       <div><dt>Packed in Houston every week</dt><dd>We pack requests in weekly batches and ship them every Friday, so allow up to a week for yours to go out.</dd></div>
-      <div><dt>Request by these dates for holiday delivery</dt><dd>International: Monday, November 30.<br>United States: Friday, December 11.<br>After that we'll keep shipping while supplies last, but yours may arrive in the new year.</dd></div>
       <div><dt>Time in transit</dt><dd>United States: usually 2&ndash;5 business days after it ships. International: usually 1&ndash;3 weeks, and customs can add more. Local customs may charge import fees on arrival, which are outside our control.</dd></div>
       <div><dt>Tracking</dt><dd>You'll get an email with a tracking number when your package ships. Outside the US, we need your phone number for customs.</dd></div>
     </dl>
@@ -515,7 +518,7 @@
     document.getElementById("labelPreview").textContent = t || "Start typing your address…";
   }
   document.getElementById("mp-form").addEventListener("input", function(e){ if(e.target.type!=="checkbox") { document.getElementById("confirmAddr").checked=false; } updatePreview(); });
-  document.getElementById("mp-form").addEventListener("change", function(e){ if(e.target.tagName==="SELECT" && e.target.id!=="quantity" && e.target.id!=="country") document.getElementById("confirmAddr").checked=false; });
+  document.getElementById("mp-form").addEventListener("change", function(e){ if(e.target.tagName==="SELECT" && e.target.id!=="quantity" && e.target.id!=="country" && e.target.id!=="addressType") document.getElementById("confirmAddr").checked=false; });
   document.getElementById("mp-form").addEventListener("change", updatePreview);
 
   // ---- Validation + submit ----
@@ -551,6 +554,7 @@
       email: val("email").toLowerCase(), phone: val("phone"),
       quantity: Number(qSel.value),
       countryName: cn[0], countryCode: cn[1]==="ZZ" ? "" : cn[1],
+      addressType: val("addressType"),
       line1: a.line1||"", line2: a.line2||"", locality: a.locality||"", city: a.city||"",
       district: a.district||"", region: a.region||"", postalCode: a.postalCode||"",
       labelAddress: buildLabel(),
