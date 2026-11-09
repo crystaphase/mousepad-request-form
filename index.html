@@ -84,10 +84,9 @@
   @media (prefers-reduced-motion:reduce){.fly{display:none}}
   .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 16px 64px}
 
-  /* The mousepad on a desk */
-  /* The art file is a finished mockup (perspective, edge, and shadow baked in), so no CSS tilt or shadow here */
-  .desk{position:relative}
-  .pad{}
+  /* The mousepad on a desk: tilt, rubber edge, and shadow (the art file is the flat production art) */
+  .desk{position:relative;padding-right:4%;transform:perspective(1600px) rotateX(16deg) rotateZ(-4deg);transform-origin:50% 60%}
+  .pad{filter:drop-shadow(0 4px 0 #0a2230) drop-shadow(0 22px 26px rgba(4,24,40,.5)) drop-shadow(0 6px 8px rgba(4,24,40,.3))}
   .pad img{display:block}
   .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 6px}
   h1{font-size:2rem;line-height:1.15;margin:0 0 12px}
@@ -141,6 +140,7 @@
     .band h1{font-size:2.2rem}
     .band .hero{grid-template-columns:1fr;gap:32px}
     .fly{width:50px;height:50px;margin:-25px 0 0 -25px}
+    .desk{transform:perspective(1200px) rotateX(12deg) rotateZ(-3deg)}
     .facts{grid-template-columns:1fr}
     .details{padding:20px}
     .hero{grid-template-columns:1fr}
@@ -171,7 +171,7 @@
     <div>
       <p class="eyebrow">Your free 2027 calendar mousepad</p>
       <h1>It&rsquo;s back.<br>And it&rsquo;s hungry.</h1>
-      <p class="lead">This year&rsquo;s calendar mousepad is a tribute to the Venus flytrap, a plant that&rsquo;s picky about what it catches. CatTrap&reg; technology works the same way, holding on to foulants and letting the feed flow through. Tell us where to send yours and how many you&rsquo;d like, up to 10 for you and your team.</p>
+      <p class="lead">This year&rsquo;s calendar mousepad is a tribute to the Venus flytrap, a plant that&rsquo;s picky about what it catches. Crystaphase technologies work the same way, holding on to foulants and letting the feed flow through. Tell us where to send yours and how many you&rsquo;d like, up to 10 for you and your team.</p>
     </div>
     <div class="desk">
     <div class="pad">
