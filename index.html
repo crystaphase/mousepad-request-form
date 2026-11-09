@@ -33,7 +33,7 @@
      on email so a repeat submission updates the same row -> Outlook
      confirmation from mousepads@crystaphase.com, BCC April).
   2. Paste the Catch Hook URL into ENDPOINT_URL below.
-  3. ART_URL points to assets/mousepad-2027-flytrap.webp (swap it if the art changes).
+  3. ART_URL points to assets/mousepad-2027-production.webp (swap it if the art changes).
   4. Add a country: copy an entry in FORMATS (or map it to a shared
      template in COUNTRY_LIST). Anything unlisted uses the international template.
 -->
@@ -91,6 +91,7 @@
   .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 6px}
   h1{font-size:2rem;line-height:1.15;margin:0 0 12px}
   .lead{color:var(--muted);margin:0}
+  .lead + .lead{margin-top:14px}
   form{background:var(--card);border:1px solid var(--line);padding:28px}
   fieldset{border:0;padding:0;margin:0 0 24px}
   legend{font-weight:600;font-size:1.05rem;margin-bottom:12px;padding:0;display:flex;gap:10px;align-items:center}
@@ -171,7 +172,8 @@
     <div>
       <p class="eyebrow">Your free 2027 calendar mousepad</p>
       <h1>It&rsquo;s back.<br>And it&rsquo;s hungry.</h1>
-      <p class="lead">This year&rsquo;s calendar mousepad is a tribute to the Venus flytrap, a plant that&rsquo;s picky about what it catches. Crystaphase technologies work the same way, holding on to foulants and letting the feed flow through. Tell us where to send yours and how many you&rsquo;d like, up to 10 for you and your team.</p>
+      <p class="lead">This year&rsquo;s calendar mousepad is a tribute to the Venus flytrap, a plant that&rsquo;s picky about what it catches.</p>
+      <p class="lead">Crystaphase technologies work the same way, holding on to foulants and letting the feed flow through. Tell us where to send yours and how many you&rsquo;d like, up to 10 for you and your team.</p>
     </div>
     <div class="desk">
     <div class="pad">
@@ -286,7 +288,7 @@
 (function(){
   // ============ CONFIG ============
   var ENDPOINT_URL = "https://hooks.zapier.com/hooks/catch/21592875/CX026M82plO7Vulqu/";
-  var ART_URL = "assets/mousepad-2027-flytrap.webp";
+  var ART_URL = "assets/mousepad-2027-production.webp";
   var CAMPAIGN = "mousepad-2027";
   var MAX_QTY = 10;
   // ================================
