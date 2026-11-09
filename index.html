@@ -16,7 +16,7 @@
   - Step 2: the address fields rebuild for that country: field names, order,
     which fields are required, dropdowns (US states, Canadian provinces,
     Mexican/Brazilian/Indian states, Jamaican parishes, etc.) and postal-code checks.
-  - Before submitting, they see "Your shipping label will read:" in the exact
+  - Before submitting, they see "Your mailing label will read:" in the exact
     format the destination country's post office expects, and confirm it.
 
   WHAT YOU RECEIVE (form-encoded POST to the Zapier Catch Hook -> one tracker row)
@@ -84,9 +84,10 @@
   @media (prefers-reduced-motion:reduce){.fly{display:none}}
   .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 16px 64px}
 
-  /* The mousepad on a desk: tilt, rubber edge, shadow, and a mouse */
-  .desk{position:relative;padding-right:4%;transform:perspective(1600px) rotateX(16deg) rotateZ(-4deg);transform-origin:50% 60%}
-  .pad{filter:drop-shadow(0 4px 0 #0a2230) drop-shadow(0 22px 26px rgba(4,24,40,.5)) drop-shadow(0 6px 8px rgba(4,24,40,.3))}
+  /* The mousepad on a desk */
+  /* The art file is a finished mockup (perspective, edge, and shadow baked in), so no CSS tilt or shadow here */
+  .desk{position:relative}
+  .pad{}
   .pad img{display:block}
   .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 6px}
   h1{font-size:2rem;line-height:1.15;margin:0 0 12px}
@@ -140,7 +141,6 @@
     .band h1{font-size:2.2rem}
     .band .hero{grid-template-columns:1fr;gap:32px}
     .fly{width:50px;height:50px;margin:-25px 0 0 -25px}
-    .desk{transform:perspective(1200px) rotateX(12deg) rotateZ(-3deg)}
     .facts{grid-template-columns:1fr}
     .details{padding:20px}
     .hero{grid-template-columns:1fr}
@@ -171,11 +171,11 @@
     <div>
       <p class="eyebrow">Your free 2027 calendar mousepad</p>
       <h1>It&rsquo;s back.<br>And it&rsquo;s hungry.</h1>
-      <p class="lead">Every year we make a calendar mousepad for the people we work with. Tell us where to send yours and how many you&rsquo;d like, up to 10 for you and your team. We ship weekly from Houston, with tracking, to anywhere in the world.</p>
+      <p class="lead">This year&rsquo;s calendar mousepad is a tribute to the Venus flytrap, a plant that&rsquo;s picky about what it catches. CatTrap&reg; technology works the same way, holding on to foulants and letting the feed flow through. Tell us where to send yours and how many you&rsquo;d like, up to 10 for you and your team.</p>
     </div>
     <div class="desk">
     <div class="pad">
-      <img id="art" alt="The 2027 Crystaphase calendar mousepad: a Venus flytrap biting into a Crystaphase ceramic foam disc beside the headline 'We feed on foulants.'" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 450'><rect width='380' height='450' fill='%23f1f1ef'/><rect x='24' y='24' width='332' height='402' fill='none' stroke='%23c8102e' stroke-width='3'/><text x='190' y='225' font-family='Arial' font-size='20' text-anchor='middle' fill='%23555'>2027 mousepad art</text></svg>">
+      <img id="art" alt="The 2027 Crystaphase calendar mousepad: a Venus flytrap closing on a piece of CatTrap beside the headline 'We feed on foulants.'" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 450'><rect width='380' height='450' fill='%23f1f1ef'/><rect x='24' y='24' width='332' height='402' fill='none' stroke='%23c8102e' stroke-width='3'/><text x='190' y='225' font-family='Arial' font-size='20' text-anchor='middle' fill='%23555'>2027 mousepad art</text></svg>">
     </div>
     </div>
   </section>
@@ -186,7 +186,7 @@
     <div id="banner" class="banner" role="alert"></div>
 
     <fieldset>
-      <legend><span class="step">1</span>Where should we ship it?</legend>
+      <legend><span class="step">1</span>Where should we send it?</legend>
       <div class="field">
         <label for="country">Destination country</label>
         <select id="country" name="country" autocomplete="country" required></select>
@@ -196,7 +196,7 @@
     </fieldset>
 
     <fieldset>
-      <legend><span class="step">2</span>Shipping address</legend>
+      <legend><span class="step">2</span>Mailing address</legend>
       <div id="lockedMsg" class="locked">Choose a country above to see its address fields.</div>
       <div id="addressBlock" hidden>
         <div class="grid">
@@ -210,10 +210,10 @@
         </div>
         <div class="grid">
           <div class="field w3"><label for="email">Work email</label><input id="email" name="email" type="email" autocomplete="email" required><div class="err-msg">Please enter a valid email.</div></div>
-          <div class="field w3"><label for="phone">Phone <span class="opt" id="phoneOpt"></span></label><input id="phone" name="phone" type="tel" autocomplete="tel"><div class="hint" id="phoneHint"></div><div class="err-msg">A phone number is required for international shipments (customs).</div></div>
+          <div class="field w3"><label for="phone">Phone <span class="opt" id="phoneOpt"></span></label><input id="phone" name="phone" type="tel" autocomplete="tel"><div class="hint" id="phoneHint"></div><div class="err-msg">A phone number is required for addresses outside the US.</div></div>
         </div>
         <div class="preview" aria-live="polite">
-          <h3>Your shipping label will read</h3>
+          <h3>Your mailing label will read</h3>
           <pre id="labelPreview"></pre>
         </div>
       </div>
@@ -223,8 +223,8 @@
       <fieldset>
         <legend><span class="step">3</span>Your order</legend>
         <div class="field" style="max-width:220px"><label for="quantity">How many mousepads?</label><select id="quantity" name="quantity" required></select></div>
-        <div class="field"><label class="check"><input type="checkbox" id="confirmAddr" required><span>The shipping label above is correct.</span></label><div class="err-msg">Please check your label and confirm it.</div></div>
-        <div class="field"><label class="check"><input type="checkbox" id="consent" required><span>I agree that Crystaphase may use this information to ship my mousepad and contact me about it. See our privacy statement.</span></label><div class="err-msg">Please check the box to continue.</div></div>
+        <div class="field"><label class="check"><input type="checkbox" id="confirmAddr" required><span>The address above is correct.</span></label><div class="err-msg">Please check your address and confirm it.</div></div>
+        <div class="field"><label class="check"><input type="checkbox" id="consent" required><span>I agree that Crystaphase may use this information to send my mousepad and contact me about it. See our privacy statement.</span></label><div class="err-msg">Please check the box to continue.</div></div>
       </fieldset>
       <div class="hp" aria-hidden="true"><label for="website">Leave blank</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
       <button type="submit" id="submitBtn">Send my mousepads</button>
@@ -234,18 +234,12 @@
 
   <section class="thanks" id="thanks" aria-live="polite">
     <h2>You're on the list.</h2>
-    <p>We ship every Friday. You'll get a tracking email when yours goes out.</p>
-    <p class="note">Questions? Email <a href="mailto:mousepads@crystaphase.com">mousepads@crystaphase.com</a> or reach out to your Crystaphase representative.</p>
+    <p>Thanks for requesting your 2027 calendar mousepad. Watch your inbox for a confirmation email with your order number and the address we have on file.</p>
   </section>
 
   <section class="details" aria-labelledby="details-h">
-    <h2 id="details-h">Packing, shipping, and lead times</h2>
-    <dl class="facts">
-      <div><dt>Packed in Houston every week</dt><dd>We pack requests in weekly batches and ship them every Friday, so allow up to a week for yours to go out.</dd></div>
-      <div><dt>Time in transit</dt><dd>United States: usually 2&ndash;5 business days after it ships. International: usually 1&ndash;3 weeks, and customs can add more. Local customs may charge import fees on arrival, which are outside our control.</dd></div>
-      <div><dt>Tracking</dt><dd>You'll get an email with a tracking number when your package ships. Outside the US, we need your phone number for customs.</dd></div>
-    </dl>
-    <p class="contact">Questions? Email <a href="mailto:mousepads@crystaphase.com">mousepads@crystaphase.com</a> or reach out to your Crystaphase representative.</p>
+    <h2 id="details-h">Questions</h2>
+    <p class="contact" style="margin:0;padding:0;border:0">Email <a href="mailto:mousepads@crystaphase.com">mousepads@crystaphase.com</a> or reach out to your Crystaphase representative.</p>
   </section>
   </div>
   <div class="fly" id="fly" aria-hidden="true">
@@ -477,8 +471,8 @@
     addrWrap.querySelectorAll("[data-k]").forEach(function(el){ if(keep[el.dataset.k] && el.tagName==="INPUT") el.value=keep[el.dataset.k]; });
     var intl = currentCode!=="US";
     var ph=document.getElementById("phone"); ph.required=intl;
-    document.getElementById("phoneOpt").textContent = intl ? "(required for customs)" : "(optional)";
-    document.getElementById("phoneHint").textContent = intl ? "Include the country code, e.g., +34 91 123 4567" : "Carriers use this if there's a delivery question.";
+    document.getElementById("phoneOpt").textContent = intl ? "(required outside the US)" : "(optional)";
+    document.getElementById("phoneHint").textContent = intl ? "Include the country code, e.g., +34 91 123 4567" : "In case we have a question about your address.";
     document.getElementById("confirmAddr").checked=false;
     updatePreview();
   }
